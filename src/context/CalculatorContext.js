@@ -9,9 +9,9 @@ function CalculatorContextProvider ({ children }) {
     }
 
     return (
-        <CalculatorContextProvider value={contextValue}>
+        <CalculatorContext.Provider value={contextValue}>
             {children}
-        </CalculatorContextProvider>
+        </CalculatorContext.Provider>
     );
 
 };
