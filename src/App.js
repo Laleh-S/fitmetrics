@@ -4,10 +4,10 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import CalculatorContextProvider from "./context/CalculatorContext";
+import { CalculatorContextProvider, } from './context/CalculatorContext';
 
-import LandingPage from "./components/LandingPage"
-
+import Home from "./components/Home";
+import Navbar from "./components/Navbar"
 
 
 function App () {
@@ -16,9 +16,11 @@ function App () {
             {/* CalculatorContextProvider component wraps around other components and provide them with access to the CalculatorContext.*/}
             <CalculatorContextProvider> 
                 <Router>
+                    <Navbar>
                     <Routes>
-                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/" element={<Home />} />
                     </Routes>
+                    </Navbar>
                 </Router>
             </CalculatorContextProvider>
         </div>
@@ -26,3 +28,4 @@ function App () {
 };
 
 export default App;
+

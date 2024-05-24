@@ -1,19 +1,16 @@
-import { React, createContext, useState } from "react";
+import { React, createContext } from "react";
 
-export const CalculatorContext = createContext();
+const CalculatorContext = createContext();
 
-function CalculatorContextProvider ({ children }) {
+function CalculatorContextProvider({ children }) {
+  const contextValue = {};
 
-    const contextValue = {
+  return (
+    <CalculatorContext.Provider value={contextValue}>
+      {children}
+    </CalculatorContext.Provider>
+  );
+}
 
-    }
+export { CalculatorContextProvider, CalculatorContext };
 
-    return (
-        <CalculatorContext.Provider value={contextValue}>
-            {children}
-        </CalculatorContext.Provider>
-    );
-
-};
-
-export default CalculatorContextProvider;
