@@ -3,8 +3,9 @@ import React, { useState } from "react";
 function BMI () {
 
     return (
-        <div>
-            <h1>Welcome to FitMetrics</h1>
+        <div className="">
+            <h1>BMI Calculator</h1>
+            <p className="">hello from BMI</p>
         </div>
     );
 };
