@@ -9,7 +9,7 @@ import "../index.css"
 function Navbar () {
 
     return (
-        <nav className="bg-primary  h-24">
+        <nav className="bg-primary  h-24 ">
             <div className=" max-w-7xl mx-auto "> 
             <Link to="/" className=" text-yellow text-xl font-bold">
                 <img src={logoYellow} alt="Logo" className="w-40 pt-4"/>
