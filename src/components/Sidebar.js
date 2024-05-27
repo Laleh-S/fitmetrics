@@ -5,7 +5,7 @@ import "../index.css"
 // h-[calc(100vh-2rem)] calculates the height by taking the full height of the viewport (100vh) and subtracting 2rem from it. 
 function Sidebar() {
     return (
-        <aside className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 bg-primary">
+        <aside className="h-[calc(100vh-2rem)] w-full max-w-[15rem] p-4 bg-primary">
             <div className="">
                 <h2 className="">Calculators</h2>
                 <ul>

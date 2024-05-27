@@ -11,18 +11,14 @@ import Sidebar from './components/Sidebar';
 import BMI from "./components/BMI"
 
 
-
-
-
 function App() {
     return (
-        <div className="">
             <CalculatorContextProvider> 
                 <Router>
                     <Navbar />
-                    <div className=""> {/* Use flex to arrange navbar and main content */}
+                    <div className="flex"> 
                         <Sidebar />
-                        <div className=""> {/* Use flex-1 to allow main content to take up remaining space */}
+                        <div className="flex"> 
                             <Routes>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/bmi" element={<BMI />} />
@@ -31,7 +27,6 @@ function App() {
                     </div>
                 </Router>
             </CalculatorContextProvider>
-        </div>
     );
 }
 
