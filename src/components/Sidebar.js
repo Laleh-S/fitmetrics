@@ -7,7 +7,7 @@ function Sidebar() {
     return (
         <aside className="h-full w-full max-w-[15rem] p-4 bg-primary">
             <div className="">
-                <h2 className="">Calculators</h2>
+                <h1 className="font-bold text-2xl text-yellow">Calculators</h1>
                 <ul>
                     <li><Link to="/bmi" className="">BMI Calculator</Link></li>
                     <li><Link to="/vo2max" className="">VO2max Calculator</Link></li>

@@ -9,10 +9,10 @@ import "../index.css"
 function Navbar () {
 
     return (
-        <nav className="bg-primary  h-24 ">
-            <div className=" max-w-7xl mx-auto "> 
+        <nav className="bg-yellow  h-24 ">
+            <div className="max-w-7xl mx-auto flex items-center h-full"> 
             <Link to="/" className=" text-yellow text-xl font-bold">
-                <img src={logoYellow} alt="Logo" className="w-40 pt-4"/>
+                <img src={logoBlue} alt="Logo" className="w-40 "/>
             </Link> 
             </div>
         </nav>
