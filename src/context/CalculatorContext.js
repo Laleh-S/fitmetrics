@@ -8,15 +8,27 @@ function CalculatorContextProvider({ children }) {
   const [weight, setWeight] = useState(""); 
   const [height, setHeight] = useState("");
   const [bmi, setBmi] = useState(null);
+  const [message, setMessage] = useState("")
 
 
   // Calculating BMI function
   const calculateBMI = () => {
     const heightToMeter = height / 100
     const bmiValue = weight / (heightToMeter * heightToMeter)
-    setBmi(bmiValue)
-};
+    setBmi(bmiValue.toFixed(2))
 
+    let bmiMessage = "";
+    if (bmiValue < 18.5){
+      bmiMessage = "Underweight";
+    } else if (bmiValue >= 18.5 && bmiValue < 24.9){
+      bmiMessage = "Normal weight";
+    } else if (bmiValue >= 25 && bmiValue < 29.9 ) {
+      bmiMessage = "Overweight";
+    } else {
+      bmiMessage = "Obese";
+    }
+    setMessage(bmiMessage)
+};
 
   const contextValue = {
     weight, 
@@ -26,6 +38,8 @@ function CalculatorContextProvider({ children }) {
     bmi, 
     setBmi,
     calculateBMI,
+    message, 
+    setMessage,
   };
 
   return (
