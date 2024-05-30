@@ -9,8 +9,8 @@ function Sidebar() {
             <div className="">
                 <h1 className="font-bold text-2xl text-yellow">Calculators</h1>
                 <ul>
-                    <li><Link to="/bmi" className="">BMI Calculator</Link></li>
-                    <li><Link to="/vo2max" className="">VO2max Calculator</Link></li>
+                    <li><Link to="/bmi" className="text-yellow">BMI Calculator</Link></li>
+                    <li><Link to="/vo2max" className="text-yellow">VO2max Calculator</Link></li>
                 </ul>
             </div>
         </aside>

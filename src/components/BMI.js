@@ -1,26 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setWeight, setHeight, calculateBMI } from "../slices/bmiSlice";
+import { updateWeight, updateHeight, calculateBMI } from "../slices/bmiSlice";
 
 
 function BMI () {
     const dispatch = useDispatch();
     const { weight, height, bmi, message } = useSelector((state) => state.bmi);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "height") {
-            dispatch(setHeight(value));
-        } else {
-            dispatch(setWeight(value));
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        if (name === 'height') {
+            dispatch(updateHeight(parseInt(value)));
+        } else if (name === 'weight') {
+            dispatch(updateWeight(parseInt(value)));
         }
-        };
+    };
+
     
-        const handleCalculate = () => {
+    const handleCalculate = () => {
         dispatch(calculateBMI());
-        };
-
-
+    };
 
     return (
         <div className="max-w-lg mx-auto p-6 border border-gray-200 rounded-lg shadow-md">
@@ -32,7 +31,7 @@ function BMI () {
                         type="number"
                         name="height"
                         value={height}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         className=""
                     />
                 </label>
@@ -44,7 +43,7 @@ function BMI () {
                         type="number"
                         name="weight"
                         value={weight}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         className=""
                     />
                 </label>

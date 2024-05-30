@@ -5,8 +5,9 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CalculatorContextProvider, } from './context/CalculatorContext';
+import { Provider } from 'react-redux';
 
+import store from "./store/index";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar"
 import Sidebar from './components/Sidebar';
@@ -15,7 +16,7 @@ import BMI from "./components/BMI"
 
 function App() {
     return (
-            <CalculatorContextProvider> 
+            <Provider store={store}> 
                 <Router>
                     <div className="flex flex-col h-screen"> {/* "h-scree" makes the main container take up the full height of the viewport */}
                         <Navbar />
@@ -30,7 +31,7 @@ function App() {
                         </div>
                     </div>
                 </Router>
-            </CalculatorContextProvider>
+            </Provider>
     );
 }
 
