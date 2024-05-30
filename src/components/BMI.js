@@ -1,21 +1,38 @@
-import React, { useContext } from "react";
-import { CalculatorContext } from "../context/CalculatorContext";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setWeight, setHeight, calculateBMI } from "../slices/bmiSlice";
 
 
 function BMI () {
-    const { weight, setWeight, height, setHeight, bmi, setBmi, calculateBMI, message, setMessage } = useContext(CalculatorContext);
+    const dispatch = useDispatch();
+    const { weight, height, bmi, message } = useSelector((state) => state.bmi);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === "height") {
+            dispatch(setHeight(value));
+        } else {
+            dispatch(setWeight(value));
+        }
+        };
+    
+        const handleCalculate = () => {
+        dispatch(calculateBMI());
+        };
+
 
 
     return (
-        <div className="">
+        <div className="max-w-lg mx-auto p-6 border border-gray-200 rounded-lg shadow-md">
             <h1 className="">BMI Calculator</h1>
-            <div className="">
-                <label className="">
+            <div className="block text-sm font-medium text-gray-700">
+                <label className="font-medium text-gray-700">
                     Height (cm)
                     <input 
-                        number="number"
+                        type="number"
+                        name="height"
                         value={height}
-                        onChange={(e) => setHeight(e.target.value)}
+                        onChange={handleChange}
                         className=""
                     />
                 </label>
@@ -24,22 +41,23 @@ function BMI () {
                 <label className="">
                     Weight (kg)
                     <input 
-                        number="number"
+                        type="number"
+                        name="weight"
                         value={weight}
-                        onChange={(e) => setWeight(e.target.value)}
+                        onChange={handleChange}
                         className=""
                     />
                 </label>
             </div>
             <button 
-                onClick={calculateBMI}
+                onClick={handleCalculate}
                 className=""
             > 
                 calculate BMI </button>
                 {bmi && (
                     <div className="">
                         <h2 className="">Your BMI is: {bmi}</h2>
-                        <p className="">{message}</p>
+                        <p className="mt-1 text-lg">{message}</p>
                     </div>
                 )}
         </div>

@@ -1,21 +1,24 @@
-import { React, createContext,useState } from "react";
+import { React, createContext,useState, useReducer } from "react";
 
 const CalculatorContext = createContext();
 
 function CalculatorContextProvider({ children }) {
-   // "" act as placeholder for form input. Stating the user hasn't input any value yet, when component first renders.
+  // "" act as placeholder for form input. Stating the user hasn't input any value yet, when component first renders.
   // null indicates that the BMI value is not yet calculated or available.
   const [weight, setWeight] = useState(""); 
   const [height, setHeight] = useState("");
   const [bmi, setBmi] = useState(null);
-  const [message, setMessage] = useState("")
+  
 
 
-  // Calculating BMI function
+  // ============================ 
+  // BMI calculation function
+  // ============================  
   const calculateBMI = () => {
+  
     const heightToMeter = height / 100
     const bmiValue = weight / (heightToMeter * heightToMeter)
-    setBmi(bmiValue.toFixed(2))
+    // setBmi(bmiValue.toFixed(2))
 
     let bmiMessage = "";
     if (bmiValue < 18.5){
@@ -27,7 +30,7 @@ function CalculatorContextProvider({ children }) {
     } else {
       bmiMessage = "Obese";
     }
-    setMessage(bmiMessage)
+    
 };
 
   const contextValue = {
@@ -37,9 +40,6 @@ function CalculatorContextProvider({ children }) {
     setHeight,
     bmi, 
     setBmi,
-    calculateBMI,
-    message, 
-    setMessage,
   };
 
   return (
