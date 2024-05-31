@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import sharedReducer from './slices/sharedSlice';
-import bmiReducer from "../slices/bmiSlice";
+import bmiReducer from "../store/slices/bmiSlice";
 
 
 const rootReducer = {

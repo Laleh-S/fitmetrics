@@ -4,13 +4,13 @@
 
 
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from 'react-redux';
 
 import store from "./store/index";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar"
-import Sidebar from './components/Sidebar';
+import Sidebar from "./components/Sidebar";
 import BMI from "./components/BMI"
 
 
