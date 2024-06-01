@@ -62,16 +62,20 @@ const bmiSlice = createSlice({
             // Determines the BMI range
             let bmiMessage = "";
 
-            if (bmiValue < 18.5){
+            if (bmiValue < 18.5) {
                 bmiMessage = "Underweight";
-            } else if (bmiValue >= 18.5 && bmiValue < 24.9){
+            } else if (bmiValue >= 18.5 && bmiValue < 25) {
                 bmiMessage = "Normal weight";
-            } else if (bmiValue >= 25 && bmiValue < 29.9 ) {
+            } else if (bmiValue >= 25 && bmiValue < 30) {
                 bmiMessage = "Overweight";
-            } else if (bmiValue >  29.9){
+            } else if (bmiValue >= 30 && bmiValue < 35) {
                 bmiMessage = "Obese";
-            } 
-
+            } else if (bmiValue >= 35 && bmiValue < 40) {
+                bmiMessage = "Severely Obese";
+            } else if (bmiValue > 40){
+                bmiMessage = "Very Severely Obese";
+            }
+            
             state.bmi = bmiValue.toFixed(2);
             state.message = bmiMessage;
         },

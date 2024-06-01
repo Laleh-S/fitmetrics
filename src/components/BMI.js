@@ -21,9 +21,36 @@ function BMI () {
         dispatch(calculateBMI());
     };
 
+    // Background color based on the BMI message
+    let bgColor = "";
+
+    if (message === "Underweight"){
+        bgColor = "bg-blue-500"
+    } else if (message === "Normal weight") {
+        bgColor = "bg-green-500";
+    } else if (message === "Overweight") {
+        bgColor = "bg-yellow-500";
+    } else if (message === "Obese") {
+        bgColor = "bg-orange-500";
+    } else if (message === "Severely Obese") {
+        bgColor = "bg-red-500";
+    } else if (message === "Very Severely Obese") {
+        bgColor = "bg-red-700";
+    }
+
     return (
+        <div>
+        <div>
+        <ul className="list-disc pl-5">
+        <li>below 18.5 - you're in the underweight range</li>
+        <li>18.5 to 24.9 – you're in the healthy weight range</li>
+        <li>25 to 29.9 – you're in the overweight range</li>
+        <li>30 to 39.9 – you're in the obese range</li>
+        <li>40 or above – you're in the severely obese range</li>
+        </ul>
+        </div>
         <div className="max-w-lg mx-auto p-6 border border-gray-200 rounded-lg shadow-md">
-            <h1 className="text-xl font-semibold mb-4">BMI Calculator</h1>
+            <h1 className="text-xl font-semibold mb-4">Calculator Your BMI</h1>
             <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                     Height (cm)
@@ -59,11 +86,12 @@ function BMI () {
                 Calculate BMI
             </button>
             {bmi && (
-                <div className="mt-6">
-                    <h2 className="text-lg font-semibold">Your BMI is: {bmi}</h2>
-                    <p className="mt-1 text-lg">{message}</p>
+                <div className="mt-6 text-center font-semibold">
+                    <h2 className="text-lg ">Your BMI is: {bmi}</h2>
+                    <p className={`mt-1 text-lg px-2 py-2 rounded mx-20 ${bgColor}`}>{message}</p>
                 </div>
             )}
+        </div>
         </div>
     );
 };

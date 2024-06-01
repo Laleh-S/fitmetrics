@@ -4,10 +4,8 @@ import bmiReducer from "../store/slices/bmiSlice";
 
 
 const rootReducer = {
-//   shared: sharedReducer,
+//  shared: sharedReducer,
     bmi: bmiReducer,
-
-  // Add other reducers as needed
 };
 
 const store = configureStore({
