@@ -46,7 +46,8 @@ function BMI () {
         <div className="flex flex-wrap items-center mt-8 px-4">
             <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Body Mass Index (BMI) Calculator</h1>
             <div className="w-full md:w-1/2 p-4  md:pl-16">
-                <p className="text-lg leading-relaxed mb-4">Body Mass Index (BMI) is a numerical value derived from a person's weight and height, used to assess whether they have a healthy body weight for a given height. The BMI falls into different categories:</p>
+                <p className="text-lg text-justify leading-relaxed mb-4">Body Mass Index (BMI) is a numerical value derived from a person's weight and height, used to assess whether they have a healthy body weight for a given height. 
+                The BMI falls into different categories to help identify potential health risks associated with being underweight, overweight, or obese. </p>
                 <ul className="text-lg ml-8 list-disc text-left leading-relaxed">
                     <li><span className="font-semibold">Below 18.5</span> - you're in the underweight range</li>
                     <li><span className="font-semibold">18.5 to 24.9</span> - you're in the healthy weight range</li>
