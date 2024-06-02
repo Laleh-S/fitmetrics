@@ -1,8 +1,12 @@
 // createSlice: 
-// is a function provided by Redux Toolkit for creating Redux slices.
+// is a function provided by Redux Toolkit for creating a slice of your Redux state. 
+// It takes an object as an argument with several properties: name, initialState, and reducers.
 
 // Redux slices:
 // are pieces of the Redux state and the associated actions and reducers.
+
+// Reducers or reducer functions:
+// This is an object where you define functions. specifys how the state should change in response to different actions. 
 
 // calculateBMI:
 // doesn't require additional data from the action payload. Instead, 
