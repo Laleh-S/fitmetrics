@@ -6,8 +6,8 @@ import "../index.css"
 function Sidebar() {
     return (
         <aside className="h-full w-full max-w-[15rem] p-4 bg-primary">
-            <div className="">
-                <h1 className="font-bold text-2xl text-yellow">Calculators</h1>
+            <div className="flex flex-col items-center">
+                <h1 className="font-bold text-2xl text-yellow m-4">Calculators</h1>
                 <ul>
                     <li><Link to="/bmi" className="text-yellow">BMI Calculator</Link></li>
                     <li><Link to="/vo2max" className="text-yellow">VO2max Calculator</Link></li>

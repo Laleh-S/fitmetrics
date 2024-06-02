@@ -43,8 +43,20 @@ function BMI () {
     }
 
     return (
-        <div className="">
-            <div className="max-w-lg mx-auto p-6 border border-gray-200 rounded-lg shadow-md">
+        <div className="flex flex-wrap items-center mt-8 px-4">
+            <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Body Mass Index (BMI) Calculator</h1>
+            <div className="w-full md:w-1/2 p-4  md:pl-16">
+                <p className="text-lg leading-relaxed mb-4">Body Mass Index (BMI) is a numerical value derived from a person's weight and height, used to assess whether they have a healthy body weight for a given height. The BMI falls into different categories:</p>
+                <ul className="text-lg ml-8 list-disc text-left leading-relaxed">
+                    <li><span className="font-semibold">Below 18.5</span> - you're in the underweight range</li>
+                    <li><span className="font-semibold">18.5 to 24.9</span> - you're in the healthy weight range</li>
+                    <li><span className="font-semibold">25 to 29.9</span> - you're in the overweight range</li>
+                    <li><span className="font-semibold">30 to 34.9</span> - you're in the obese range</li>
+                    <li><span className="font-semibold">35 to 39.9</span> - you're in the severely obese range</li>
+                    <li><span className="font-semibold">40 or above</span> - you're in the very severely obese range</li>
+                </ul>
+            </div>
+            <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-4">Calculator Your BMI</h2>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -89,14 +101,14 @@ function BMI () {
                 </div>
                 <button 
                     onClick={handleCalculateBMI}
-                    className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+                    className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300"
                 > 
                     Calculate BMI
                 </button>
                 {bmi && (
                 <div className="mt-6 text-center font-semibold">
                     <h2 className="text-lg ">Your BMI is: {bmi}</h2>
-                    <p className={`mt-1 text-lg px-2 py-2 rounded mx-20 ${bgColor}`}>{message}</p>
+                    <p className={`mt-1 text-lg px-2 py-2 rounded ${bgColor}`}>{message}</p>
                 </div>
                 )}
             </div>
