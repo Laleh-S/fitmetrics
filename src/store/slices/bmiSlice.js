@@ -33,20 +33,20 @@ const bmiSlice = createSlice({
     reducers: {
         setWeight(state, action){
             state.weight = action.payload;
-            if (action.payload) { // clears error message after entering input
+            if (action.payload) { 
                 // This code checks if there's a new weight value provided (not empty, null, or undefined); if so, 
                 // it updates only the weight part of the error state to false, indicating no weight-related error.
                 state.error = { ...state.error, weight: false };
             }
         },
         setHeight(state, action){
-            state.height = action.payload; // clears error message after entering input
-            if (action.payload) {
+            state.height = action.payload; 
+            if (action.payload) {  // clears error message after entering input
                 state.error = { ...state.error, height: false };
             }
         },
         setUnit(state, action){
-            state.unit = action.payload;
+            state.unit = action.payload;  // action.payload is the data carried by the action to update the height property of the state.
         }, 
         calculateBMI(state){
             const weight = parseFloat(state.weight);
@@ -63,6 +63,7 @@ const bmiSlice = createSlice({
                 return; // "return" stops the function from continuing if certain conditions are met.
             }
 
+            // BMI calculation formula
             let bmiValue;
             if (state.unit === "imperial") {
                 bmiValue = (weight / (height * height)) * 703;

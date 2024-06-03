@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import sharedReducer from './slices/sharedSlice';
 import bmiReducer from "../store/slices/bmiSlice";
+import bmrReducer from "../store/slices/bmrSlice";
 
 
 const rootReducer = {
-//  shared: sharedReducer,
     bmi: bmiReducer,
+    bmr: bmrReducer,
 };
 
 const store = configureStore({
