@@ -9,9 +9,10 @@ import { Provider } from 'react-redux';
 
 import store from "./store/index";
 import Home from "./components/Home";
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-import BMI from "./components/BMI"
+import BMI from "./components/BMI";
+import BMR from "./components/BMR";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                                 <Routes>
                                     <Route path="/" element={<Home />} />
                                     <Route path="/bmi" element={<BMI />} />
+                                    <Route path="/bmr" element={<BMR />} />
                                 </Routes>
                             </div>
                         </div>
