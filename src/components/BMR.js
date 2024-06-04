@@ -1,13 +1,32 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setWeight, setHeight, setAge, setGender, calculateBMR, setUnit } from "../store/slices/bmiSlice";
+import { setWeight, setHeight, setAge, setGender, calculateBMR, setUnit } from "../store/slices/bmrSlice";
 
 function BMR () {
     const dispatch = useDispatch();
-    const { weight, height, age, gender, bmi, message, error, unit} = useSelector((state) => state.bmr)
+    const { weight, height, age, gender, bmr, message, error, unit} = useSelector((state) => state.bmr)
 
     const handleInputChange = (event) => {
-        
+        const { name, value } = event.target;
+        if (name === "weight") {
+            dispatch(setWeight(value));
+        } else if (name === "height") {
+            dispatch(setHeight(value));
+        } else if (name === "age") {
+            dispatch(setAge(value));
+        }
+    };
+
+    const handleCalculateBMR = () => {
+        dispatch(calculateBMR());
+    };
+
+    const handleUnitChange = (event) => {
+        dispatch(setUnit(event.target.value))
+    };
+
+    const handleGenderChange = (event) => {
+        dispatch(setGender(event.target.value))
     };
 
     return (
@@ -19,8 +38,85 @@ function BMR () {
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-4">Calculator Your BMR</h2>
-                
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Unit
+                        <select
+                            value={unit}
+                            onChange={handleUnitChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        >
+                            <option value="metric">Metric (kg, cm)</option>
+                            <option value="imperial">Imperial (lbs, inches)</option>
+                        </select>
+                    </label>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Gender
+                        <select
+                            value={gender}
+                            onChange={handleGenderChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        >
+                            <option value="metric">Male</option>
+                            <option value="imperial">Female</option>
+                        </select>
+                    </label>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Weight ({unit === "metric" ? "kg" : "lbs"})
+                        <input 
+                            type="number"
+                            name="weight"
+                            value={weight}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        />
+                        
+                    </label>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Height ({unit === "metric" ? "cm" : "inches"})
+                        <input 
+                            type="number"
+                            name="height"
+                            value={height}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        />
+                        
+                    </label>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Age 
+                        <input 
+                            type="number"
+                            name="age"
+                            value={age}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        />
+                        
+                    </label>
+                </div>
+                <button 
+                    onClick={handleCalculateBMR}
+                    className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300"
+                > 
+                    Calculate BMR
+                </button>
+                {bmr && (
+                <div className="mt-6 text-center font-semibold">
+                    <h2 className="text-lg ">Your BMR is: {bmr} calories a day</h2>
+                    <p className="mt-1 text-lg px-2 py-2 rounded">{message}</p>
+                </div>
+                )}
             </div>
+        
         </div>
     );
 };
