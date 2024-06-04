@@ -57,7 +57,7 @@ function BMI () {
                     <li><span className="font-semibold">40 or above</span> - you're in the very severely obese range</li>
                 </ul>
             </div>
-            <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md">
+            <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
                 <h2 className="text-xl font-semibold mb-4">Calculator Your BMI</h2>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -102,12 +102,12 @@ function BMI () {
                 </div>
                 <button 
                     onClick={handleCalculateBMI}
-                    className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300"
+                    className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300 "
                 > 
                     Calculate BMI
                 </button>
                 {bmi && (
-                <div className="mt-6 text-center font-semibold">
+                <div className="mt-6 text-center font-semibold ">
                     <h2 className="text-lg ">Your BMI is: {bmi}</h2>
                     <p className={`mt-1 text-lg px-2 py-2 rounded ${bgColor}`}>{message}</p>
                 </div>

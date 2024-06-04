@@ -36,7 +36,7 @@ function BMR () {
                 <p className="text-lg text-justify leading-relaxed mb-4"> 
                 </p>
             </div>
-            <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md">
+            <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
                 <h2 className="text-xl font-semibold mb-4">Calculator Your BMR</h2>
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -74,7 +74,9 @@ function BMR () {
                             onChange={handleInputChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         />
-                        
+                        {/* The (?) is called optional chaining. It's a shorthand notation to avoid errors 
+                        when accessing properties of null or undefined objects.*/}
+                        {error?.weight && <div className="text-red-500 text-sm">Please enter a valid weight</div>}
                     </label>
                 </div>
                 <div className="mb-4">
@@ -87,7 +89,7 @@ function BMR () {
                             onChange={handleInputChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         />
-                        
+                        {error?.height && <div className="text-red-500 text-sm">Please enter a valid height</div>}
                     </label>
                 </div>
                 <div className="mb-4">
@@ -100,7 +102,7 @@ function BMR () {
                             onChange={handleInputChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         />
-                        
+                        {error?.age && <div className="text-red-500 text-sm">Please enter a valid age</div>}
                     </label>
                 </div>
                 <button 

@@ -10,7 +10,7 @@ function Sidebar() {
                 <h1 className="font-bold text-2xl text-yellow mt-8 ">Calculators</h1>
                 <ul>
                     <li className=""><Link to="/bmi" className="text-yellow">BMI Calculator</Link></li>
-                    <li className=""><Link to="/vo2max" className="text-yellow">BMR Calculator</Link></li>
+                    <li className=""><Link to="/bmr" className="text-yellow">BMR Calculator</Link></li>
                 </ul>
             </div>
         </aside>

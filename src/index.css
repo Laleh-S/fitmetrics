@@ -9,6 +9,7 @@
     --yellow-color: #f3cc04;
     --orange-color: #fba304;
     --white-color: #ffffff;
+    --grey-color: #e9e6e6;
 }
 
 .bg-primary {
@@ -16,7 +17,11 @@
 }
 
 .bg-yellow {
-    background-color: var(--orange-color);
+    background-color: var(--yellow-color);
+}
+
+.bg-grey {
+    background-color: var(--grey-color);
 }
 
 .text-primary {
