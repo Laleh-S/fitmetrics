@@ -66,18 +66,20 @@ const bmrSlice = createSlice({
             //++++++++ BMR calculation based on unit system and gender ++++++++
             let bmrValue = "";
             if (state.unit === "imperial"){
+                // Convert weight from lbs to kg and height from inches to cm
+                const weightInKg = weight / 2.20462;
+                const heightInCm = height * 2.54;
+
                 if (state.gender === "male"){
-                    bmrValue = 66 + (6.2 * weight) + (12.7 * height) - (6.76 * age);
+                    bmrValue = (10 * weightInKg) + (6.25 * heightInCm) - (5 * age) + 5;
                 } else {
-                    bmrValue = 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
+                    bmrValue = (10 * weightInKg) + (6.25 * heightInCm) - (5 * age) - 161;
                 }
-            } 
-        
-            else if (state.unit === "metric"){
+            } else if (state.unit === "metric"){
                 if (state.gender === "male"){
-                    bmrValue = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+                    bmrValue = (10 * weight) + (6.25 * height) - (5 * age) + 5;
                 } else {
-                    bmrValue = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+                    bmrValue = (10 * weight) + (6.25 * height) - (5 * age) - 161;
                 }
             }
             state.bmr = bmrValue.toFixed(2)

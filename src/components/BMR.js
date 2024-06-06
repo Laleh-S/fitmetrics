@@ -38,19 +38,17 @@ function BMR () {
             <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Basal Metabolic Rate (BMR) Calculator</h1>
             <div className="w-full md:w-1/2 p-4  md:pl-16">
                 <p className="text-lg text-justify leading-relaxed mb-4">
-                    BMR stands for Basal Metabolic Rate. It refers to the number of 
-                    calories your body needs to maintain basic physiological functions while at rest, such as breathing, circulating blood, 
-                    and regulating body temperature. BMR represents the minimum amount of energy your body needs to function while you are 
-                    completely inactive. 
+                    BMR refers to the minimum amount of energy the body needs to maintain basic physiological functions while completely 
+                    inactive, such as breathing, circulating blood, and regulating body temperature.
                     <br/> <br/>
                     The BMR is measured under very restrictive conditions while awake. To obtain an accurate BMR measurement, the individual's 
                     sympathetic nervous system must be inactive, meaning they must be completely at rest. 
                     <br/><br/>
-                    This calculation usesRevised Harris-Benedict Equation:
+                    This calculation uses Mifflin-St Jeor Equation:
+                    <br/><br/>
+                    <span className="font-bold">For men: </span> BMR = 10 * Weight + 6.25 * Height - 5 * Age + 5  
                     <br/>
-                    <span className="font-bold">For men: </span> BMR = 13.397Weight + 4.799Height - 5.677Age + 88.362 
-                    <br/>
-                    <span className="font-bold">For women: </span> BMR = 9.247Weight + 3.098Height - 4.330Age + 447.593
+                    <span className="font-bold">For women: </span> BMR = 10 * Weight + 6.25 * Height - 5 * Age - 161
                 </p>
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
@@ -147,9 +145,9 @@ function BMR () {
                 </button>
                 {bmr && (
                 <div className="mt-6 text-center font-semibold">
-                    <h2 className="text-lg ">Your BMR is: {bmr} calories a day</h2>
+                    <h2 className="text-lg ">Your BMR is: <span className="text-green-600">{bmr}</span></h2>
                     {dailyCalories &&
-                        <p>Daily calories based on activity level {dailyCalories}</p>
+                        <p className="text-md ">Daily calories based on activity level <span className="font-bold text-red-900">{dailyCalories}</span></p>
                     }
                     <p className="mt-1 text-lg px-2 py-2 rounded">{message}</p>
                 </div>
