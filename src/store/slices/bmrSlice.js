@@ -5,10 +5,10 @@ const initialState = {
     height: "",
     bmr: null,
     age: "",
-    gender: "",
+    gender: null,
     dailyCalories: null, // daily calorie needs based on activity level
-    activityLevel: null, // the user's selected activity level, such as "sedentary", "lightlyActive", etc
-    unit: "metric",
+    activityLevel: "", // the user's selected activity level, such as "sedentary", "lightlyActive", etc
+    unit: null,
     message: "",
     error: { weight: false, height: false, age: false },
 }

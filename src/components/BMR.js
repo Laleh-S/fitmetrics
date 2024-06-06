@@ -63,6 +63,7 @@ function BMR () {
                             onChange={handleUnitChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         >
+                            <option value="">Choose Unit</option>
                             <option value="metric">Metric (kg, cm)</option>
                             <option value="imperial">Imperial (lbs, inches)</option>
                         </select>
@@ -76,6 +77,7 @@ function BMR () {
                             onChange={handleGenderChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         >
+                            <option value="">Choose Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -128,6 +130,7 @@ function BMR () {
                             onChange={handleActivityLevelChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         >
+                            <option value="">Choose Activigy Level</option>
                             <option value="sedentary">Sedentary: little or no exercise</option>
                             <option value="lightlyActive">Exercise 1-3 times/week</option>
                             <option value="moderatelyActive">Exercise 4-5 times/week</option>

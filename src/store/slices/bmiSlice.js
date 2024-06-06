@@ -22,7 +22,7 @@ const initialState = { // This defines the initial state of our BMI slice with d
     weight: "",
     height: "",
     bmi: null,
-    unit: "metric",
+    unit: "",
     message: "",
     error: null,
 };

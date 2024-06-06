@@ -67,6 +67,7 @@ function BMI () {
                             onChange={handleUnitChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         >
+                            <option value="">Choose Unit</option>
                             <option value="metric">Metric (kg, cm)</option>
                             <option value="imperial">Imperial (lbs, inches)</option>
                         </select>
