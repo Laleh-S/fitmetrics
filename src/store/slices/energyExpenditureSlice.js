@@ -4,6 +4,7 @@ const initialState = {
     weight: "",
     height: "",
     bmr: null,
+    tdee: null,
     age: "",
     gender: null,
     dailyCalories: null, // daily calorie needs based on activity level
@@ -13,8 +14,8 @@ const initialState = {
     error: { weight: false, height: false, age: false },
 }
 
-const bmrSlice = createSlice({
-    name: "bmr",
+const energyExpenditureSlice = createSlice({
+    name: "energyExpenditure",
     initialState,
     reducers: {
         setWeight(state, action){
@@ -23,28 +24,34 @@ const bmrSlice = createSlice({
                 state.error = { ...state.error, weight: false };
             } 
         },
+
         setHeight(state, action){
             state.height = action.payload;
             if (action.payload) {  // clears error message after entering input
                 state.error = { ...state.error, height: false };
             }
         },
+
         setAge(state, action){
             state.age = action.payload;
             if (action.payload) {  
                 state.error = { ...state.error, age: false };
             }
         },
+
         setGender(state, action){
             state.gender = action.payload;
         },
+
         setUnit(state, action){
             state.unit = action.payload;
         },
+
         setActivityLevel(state, action){
             state.activityLevel = action.payload;
             console.log("Activity Level set to:", action.payload); // Log activity level
         },
+
         calculateBMR(state){
             const weight = parseFloat(state.weight);
             const height = parseFloat(state.height);
@@ -82,23 +89,34 @@ const bmrSlice = createSlice({
                     bmrValue = (10 * weight) + (6.25 * height) - (5 * age) - 161;
                 }
             }
-            state.bmr = bmrValue.toFixed(2)
-
-            //++++++++ Defines activity multipliers ++++++++
+            state.bmr = bmrValue.toFixed(2);
+        },
+        
+        calculateTDEE(state){
             const activityMultipliers = {
                 "sedentary": 1.2,
                 "lightlyActive": 1.375,
                 "moderatelyActive": 1.55,
                 "veryActive": 1.725,
                 "extraActive": 1.9
+            };
+    
+            if (state.bmr && state.activityLevel){
+                state.dailyCalories = (state.bmr * activityMultipliers[state.activityLevel]).toFixed(2)
             }
-
-            if (state.activityLevel){
-                state.dailyCalories = (bmrValue * activityMultipliers[state.activityLevel]).toFixed(2)
-            }
-        }
-    }
+        },
+    },
 });
 
-export const { setWeight, setHeight, setAge, setGender, calculateBMR, setError, setUnit, setActivityLevel } = bmrSlice.actions;
-export default bmrSlice.reducer;
+export const { 
+    setWeight, 
+    setHeight, 
+    setAge, 
+    setGender, 
+    calculateBMR,
+    calculateTDEE,
+    setError, 
+    setUnit, 
+    setActivityLevel 
+} = energyExpenditureSlice.actions;
+export default energyExpenditureSlice.reducer;

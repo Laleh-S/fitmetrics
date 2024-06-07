@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setWeight, setHeight, setAge, setGender, calculateBMR, setUnit, setActivityLevel } from "../store/slices/bmrSlice";
+import { setWeight, setHeight, setAge, setGender, calculateBMR, setUnit } from "../store/slices/energyExpenditureSlice";
 
 function BMR () {
     const dispatch = useDispatch();
-    const { weight, height, age, gender, bmr, message, error, unit, activityLevel, dailyCalories} = useSelector((state) => state.bmr)
+    const { weight, height, age, gender, bmr, message, error, unit } = useSelector((state) => state.bmr)
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -29,10 +29,6 @@ function BMR () {
         dispatch(setGender(event.target.value));
     };
 
-    const handleActivityLevelChange = (event) => {
-        dispatch(setActivityLevel(event.target.value))
-    }
-
     return (
         <div className="flex flex-wrap items-center mt-8 px-4">
             <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Basal Metabolic Rate (BMR) Calculator</h1>
@@ -40,9 +36,10 @@ function BMR () {
                 <p className="text-lg text-justify leading-relaxed mb-4">
                     BMR refers to the minimum amount of energy the body needs to maintain basic physiological functions while completely 
                     inactive, such as breathing, circulating blood, and regulating body temperature.
-                    <br/> <br/>
-                    The BMR is measured under very restrictive conditions while awake. To obtain an accurate BMR measurement, the individual's 
-                    sympathetic nervous system must be inactive, meaning they must be completely at rest. 
+                    <br/> <br/> 
+                    BMR is typically measured under very controlled conditions: after a full night's sleep, in a fasted state 
+                    (usually 12 hours without food), and in a thermoneutral environment (a temperature that does not require the
+                    body to generate extra heat or cooling).
                     <br/><br/>
                     This calculation uses Mifflin-St Jeor Equation:
                     <br/><br/>
@@ -120,23 +117,6 @@ function BMR () {
                         {error.age && <div className="text-red-500 text-sm">Please enter a valid age</div>}
                     </label>
                 </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Activity Level
-                        <select
-                            value={activityLevel}
-                            onChange={handleActivityLevelChange}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                        >
-                            <option value="">Choose Activigy Level</option>
-                            <option value="sedentary">Sedentary: little or no exercise</option>
-                            <option value="lightlyActive">Exercise 1-3 times/week</option>
-                            <option value="moderatelyActive">Exercise 4-5 times/week</option>
-                            <option value="veryActive">Daily or intense exercise 3-4 times/week</option>
-                            <option value="extraActive">Intense exercise 6-7 times/week</option>
-                        </select>
-                    </label>
-                </div>
                 <button 
                     onClick={handleCalculateBMR}
                     className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300"
@@ -146,9 +126,6 @@ function BMR () {
                 {bmr && (
                 <div className="mt-6 text-center font-semibold">
                     <h2 className="text-lg ">Your BMR is: <span className="text-green-600">{bmr}</span></h2>
-                    {dailyCalories &&
-                        <p className="text-md ">Daily calories based on activity level <span className="font-bold text-red-900">{dailyCalories}</span></p>
-                    }
                     <p className="mt-1 text-lg px-2 py-2 rounded">{message}</p>
                 </div>
                 )}
