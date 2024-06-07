@@ -59,7 +59,7 @@ const energyExpenditureSlice = createSlice({
 
             //++++++++ Checks if weight, height, or age are invalid ++++++++
             if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
-                state.bmi = null;
+                state.bmr = null;
                 state.error = {
                     weight: isNaN(weight) || weight <= 0,
                     height: isNaN(height) || height <= 0,
@@ -71,7 +71,7 @@ const energyExpenditureSlice = createSlice({
             
 
             //++++++++ BMR calculation based on unit system and gender ++++++++
-            let bmrValue = "";
+            let bmrValue = null;
             if (state.unit === "imperial"){
                 // Convert weight from lbs to kg and height from inches to cm
                 const weightInKg = weight / 2.20462;
@@ -89,7 +89,7 @@ const energyExpenditureSlice = createSlice({
                     bmrValue = (10 * weight) + (6.25 * height) - (5 * age) - 161;
                 }
             }
-            state.bmr = bmrValue.toFixed(2);
+            state.bmr = bmrValue !== null? bmrValue.toFixed(2) : null;
         },
         
         calculateTDEE(state){

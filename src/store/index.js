@@ -5,7 +5,7 @@ import energyExpenditureSlice from "../store/slices/energyExpenditureSlice";
 
 const rootReducer = {
     bmi: bmiReducer,
-    bmr: energyExpenditureSlice,
+    energyExpenditure: energyExpenditureSlice,
 };
 
 const store = configureStore({
