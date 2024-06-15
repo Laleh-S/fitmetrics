@@ -45,7 +45,7 @@ const InputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes
                     <select
                         type="number"
                         name="unit"
-                        value={unit || null}
+                        value={unit || ""}
                         onChange={handleUnitChange}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                     >
@@ -62,7 +62,7 @@ const InputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes
                     <select
                         type="number"
                         name="gender"
-                        value={gender || null}
+                        value={gender || ""}
                         onChange={handleGenderChange}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                     >
@@ -120,6 +120,7 @@ const InputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes
                         onChange={handleActivityLevelChange}
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                     >
+                        <option value="">Choose Activity</option>
                         <option value="sedentary">Sedentary: little or no exercise</option>
                         <option value="lightlyActive">Exercise 1-3 times/week</option>
                         <option value="moderatelyActive">Exercise 4-5 times/week</option>

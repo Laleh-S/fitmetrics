@@ -11,6 +11,7 @@ function Sidebar() {
                 <ul>
                     <li className=""><Link to="/bmi" className="text-yellow">BMI Calculator</Link></li>
                     <li className=""><Link to="/bmr" className="text-yellow">BMR Calculator</Link></li>
+                    <li className=""><Link to="/tdee" className="text-yellow">TDEE Calculator</Link></li>
                 </ul>
             </div>
         </aside>

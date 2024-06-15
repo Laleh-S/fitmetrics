@@ -6,10 +6,10 @@ const initialState = {
     bmr: null,
     tdee: null,
     age: "",
-    gender: null,
+    gender: "",
     dailyCalories: null, // daily calorie needs based on activity level
     activityLevel: "", // the user's selected activity level, such as "sedentary", "lightlyActive", etc
-    unit: null,
+    unit: "",
     message: "",
     error: { weight: false, height: false, age: false },
 }
@@ -49,15 +49,16 @@ const energyExpenditureSlice = createSlice({
 
         setActivityLevel(state, action){
             state.activityLevel = action.payload;
-            console.log("Activity Level set to:", action.payload); // Log activity level
         },
+        setError (state, action) { 
+            state.error = action.payload; },
 
         calculateBMR(state){
             const weight = parseFloat(state.weight);
             const height = parseFloat(state.height);
             const age = parseFloat(state.age);
 
-            //++++++++ Checks if weight, height, or age are invalid ++++++++
+            // Validates inputs
             if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
                 state.bmr = null;
                 state.error = {
@@ -65,11 +66,10 @@ const energyExpenditureSlice = createSlice({
                     height: isNaN(height) || height <= 0,
                     age: isNaN(age) || age <= 0,
                 };
-                state.message = ""; 
+                state.message = "Please provide valid inputs for all fields."; 
                 return; // "return" stops the function from continuing if certain conditions are met.
             }
             
-
             //++++++++ BMR calculation based on unit system and gender ++++++++
             let bmrValue = null;
             if (state.unit === "imperial"){
@@ -90,20 +90,66 @@ const energyExpenditureSlice = createSlice({
                 }
             }
             state.bmr = bmrValue !== null? bmrValue.toFixed(2) : null;
+            state.message = ""; // Clears any previous messages
         },
         
-        calculateTDEE(state){
+        calculateTDEE(state) {
             const activityMultipliers = {
-                "sedentary": 1.2,
-                "lightlyActive": 1.375,
-                "moderatelyActive": 1.55,
-                "veryActive": 1.725,
-                "extraActive": 1.9
+                sedentary: 1.2,
+                lightlyActive: 1.375,
+                moderatelyActive: 1.55,
+                veryActive: 1.725,
+                extraActive: 1.9,
             };
-    
-            if (state.bmr && state.activityLevel){
-                state.dailyCalories = (state.bmr * activityMultipliers[state.activityLevel]).toFixed(2)
+
+            const weight = parseFloat(state.weight);
+            const height = parseFloat(state.height);
+            const age = parseFloat(state.age);
+
+            // Validate inputs 
+            if (
+                isNaN(weight) || 
+                isNaN(height) || 
+                weight <= 0 || 
+                height <= 0 || 
+                !state.activityLevel //  checks if state.activityLevel is null, undefined, false, empty string, etc.
+            ) {
+                state.tdee = null;
+                state.error = {
+                    ...state.error,
+                    weight: isNaN(weight) || weight <= 0,
+                    height: isNaN(height) || height <= 0,
+                    age: isNaN(age) || age <= 0,
+                    activityLevel: !state.activityLevel,
+                };
+                state.message = "Please provide valid inputs for all fields.";
+                return;
             }
+
+            // Calculate BMR
+            let bmrValue = null;
+            if (state.unit === "imperial") {
+                // Convert weight from lbs to kg and height from inches to cm
+                const weightInKg = weight / 2.20462;
+                const heightInCm = height * 2.54;
+
+                if (state.gender === "male") {
+                    bmrValue = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
+                } else {
+                    bmrValue = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 161;
+                }
+            } else if (state.unit === "metric") {
+                if (state.gender === "male") {
+                    bmrValue = 10 * weight + 6.25 * height - 5 * age + 5;
+                } else {
+                    bmrValue = 10 * weight + 6.25 * height - 5 * age - 161;
+                }
+            }
+
+            // Calculate TDEE
+            state.tdee = (bmrValue * activityMultipliers[state.activityLevel]).toFixed(2);
+            state.message = ""; // Clear any previous messages
+            console.log("Calculating TDEE...");
         },
     },
 });
@@ -112,11 +158,11 @@ export const {
     setWeight, 
     setHeight, 
     setAge, 
-    setGender, 
-    calculateBMR,
-    calculateTDEE,
-    setError, 
+    setGender,
     setUnit, 
+    setError,
+    calculateBMR,
+    calculateTDEE, 
     setActivityLevel 
 } = energyExpenditureSlice.actions;
 export default energyExpenditureSlice.reducer;

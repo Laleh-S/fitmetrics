@@ -13,7 +13,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import BMI from "./components/BMI";
 import BMR from "./components/BMR";
-
+import TDEE from "./components/TDEE";
 
 function App() {
     return (
@@ -28,6 +28,7 @@ function App() {
                                     <Route path="/" element={<Home />} />
                                     <Route path="/bmi" element={<BMI />} />
                                     <Route path="/bmr" element={<BMR />} />
+                                    <Route path="/tdee" element={<TDEE />} />
                                 </Routes>
                             </div>
                         </div>
