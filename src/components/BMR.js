@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateBMR } from "../store/slices/energyExpenditureSlice";
-import InputFields from "./InputFields";
+import { calculateBMR, clearInputs } from "../store/slices/energyExpenditureSlice";
+import SharedInputFields from "./SharedInputFields";
+
 
 function BMR () {
     const dispatch = useDispatch();
@@ -10,6 +11,11 @@ function BMR () {
     const handleCalculateBMR = () => {
         console.log("Calculate BMR button clicked");
         dispatch(calculateBMR());
+    };
+
+    const handleClearInputs = () => {
+        // Clear all inputs or any other action 
+        dispatch(clearInputs());
     };
 
     return (
@@ -33,16 +39,22 @@ function BMR () {
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
                 <h2 className="text-xl font-semibold mb-4">Calculator Your BMR</h2>
-                <InputFields showActivityLevel={false} />
+                <SharedInputFields showActivityLevel={false} />
                 <button 
                     onClick={handleCalculateBMR}
                     className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-800 transition duration-300"
                 > 
                     Calculate BMR
                 </button>
+                <button
+                    onClick={handleClearInputs}
+                    className="mt-4 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300"
+                >
+                    Clear 
+                </button>
                 {bmr && (
                 <div className="mt-6 text-center font-semibold">
-                    <h2 className="text-lg ">Your BMR is: <span className="text-green-600">{bmr}</span></h2>
+                    <h2 className="text-lg">BMR = <span className="text-green-600">{bmr}</span></h2>
                     <p className="mt-1 text-lg px-2 py-2 rounded">{message}</p>
                 </div>
                 )}

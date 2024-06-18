@@ -11,7 +11,7 @@ const initialState = {
     activityLevel: "", // the user's selected activity level, such as "sedentary", "lightlyActive", etc
     unit: "",
     message: "",
-    error: { weight: false, height: false, age: false },
+    error: { weight: false, height: false, age: false, activityLevel: false },
 }
 
 const energyExpenditureSlice = createSlice({
@@ -51,8 +51,8 @@ const energyExpenditureSlice = createSlice({
             state.activityLevel = action.payload;
         },
         setError (state, action) { 
-            state.error = action.payload; },
-
+            state.error = action.payload; 
+        },
         calculateBMR(state){
             const weight = parseFloat(state.weight);
             const height = parseFloat(state.height);
@@ -151,6 +151,20 @@ const energyExpenditureSlice = createSlice({
             state.message = ""; // Clear any previous messages
             console.log("Calculating TDEE...");
         },
+        clearInputs: (state) => {
+            // Clears all input fields
+            state.weight = "";
+            state.height = "";
+            state.age = "";
+            state.gender = "";
+            state.unit = "";
+            state.activityLevel = "";
+            // Clears results
+            state.bmr = null;
+            state.tdee = null;
+            state.message = "";
+            state.error = {};
+        },
     },
 });
 
@@ -163,6 +177,7 @@ export const {
     setError,
     calculateBMR,
     calculateTDEE, 
-    setActivityLevel 
+    setActivityLevel,
+    clearInputs,
 } = energyExpenditureSlice.actions;
 export default energyExpenditureSlice.reducer;

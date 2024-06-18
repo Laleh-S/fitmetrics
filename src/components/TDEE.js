@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateTDEE } from "../store/slices/energyExpenditureSlice";
-import InputFields from "./InputFields";
+import { calculateTDEE, clearInputs } from "../store/slices/energyExpenditureSlice";
+import SharedInputFields from "./SharedInputFields";
 
 function TDEE () {
     const dispatch = useDispatch();
@@ -9,8 +9,11 @@ function TDEE () {
     console.log("TDEE in component:", tdee);
 
     const handleCalculateTDEE = () => {
-        console.log("Calculate TDEE button clicked");
-        dispatch(calculateTDEE())
+        dispatch(calculateTDEE());
+    };
+
+    const handleClearInputs = () => {
+        dispatch(clearInputs());
     };
 
     return (
@@ -23,17 +26,22 @@ function TDEE () {
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
                 <h2 className="text-xl font-semibold mb-4">Calculate Your TDEE</h2>
-                <InputFields showActivityLevel={true} />
+                <SharedInputFields showActivityLevel={true} />
                 <button 
                     onClick={handleCalculateTDEE} 
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md"
+                    className="w-full mt-4 bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-800 transition duration-300"
                 >
                     Calculate TDEE
                 </button>
-                
+                <button
+                    onClick={handleClearInputs}
+                    className="mt-4 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300"
+                >
+                    Clear 
+                </button>
                 {tdee && (
-                    <div className="mt-4">
-                        <h2 className="text-lg font-semibold">Your TDEE is: {tdee} calories/day</h2>
+                    <div className="mt-4 text-center font-semibold">
+                        <h2 className="text-lg font-semibold">TDEE = <span className="text-green-600">{tdee}</span> calories a day</h2>
                         <p>{message}</p>
                     </div>
                 )}

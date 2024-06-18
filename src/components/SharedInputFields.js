@@ -10,7 +10,7 @@ import {
     setActivityLevel,
 } from "../store/slices/energyExpenditureSlice.js";
 
-const InputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes from bmr.js
+const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes from bmr.js
     const dispatch = useDispatch();
     const { weight, height, age, gender, unit, activityLevel, error } = useSelector((state) => state.energyExpenditure);
 
@@ -131,7 +131,8 @@ const InputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes
             </div> 
             )}
         </div>
+        
     );
 };
 
-export default InputFields;
+export default SharedInputFields;

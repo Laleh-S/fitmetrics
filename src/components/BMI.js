@@ -25,7 +25,7 @@ function BMI () {
         dispatch(setUnit(event.target.value))
     };
 
-    const handleClearInputs = (event) => {
+    const handleClearInputs = () => {
         dispatch(clearBMI())
     }
 

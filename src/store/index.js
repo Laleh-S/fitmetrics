@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bmiReducer from "../store/slices/bmiSlice";
-import energyExpenditureSlice from "../store/slices/energyExpenditureSlice";
+import energyExpenditureReducer from "../store/slices/energyExpenditureSlice";
 
 
 const rootReducer = {
     bmi: bmiReducer,
-    energyExpenditure: energyExpenditureSlice,
+    energyExpenditure: energyExpenditureReducer,
 };
 
 const store = configureStore({
