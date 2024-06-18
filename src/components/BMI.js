@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setWeight, setHeight, calculateBMI, setUnit } from "../store/slices/bmiSlice";
+import { setWeight, setHeight, calculateBMI, setUnit, clearBMI } from "../store/slices/bmiSlice";
 
 
 function BMI () {
@@ -26,9 +26,7 @@ function BMI () {
     };
 
     const handleClearInputs = (event) => {
-        // clears weight and height in redux state
-        dispatch(setWeight(""))
-        dispatch(setHeight("")) 
+        dispatch(clearBMI())
     }
 
     // Background color based on the BMI message
@@ -117,11 +115,11 @@ function BMI () {
                     onClick={handleClearInputs}
                     className="mt-4 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300"
                 >
-                    Clear Inputs
+                    Clear 
                 </button>
                 {bmi && (
                 <div className="mt-6 text-center font-semibold">
-                    <h2 className="text-lg">Your BMI is {bmi}</h2>
+                    <h2 className="text-lg">BMI = {bmi}</h2>
                     <div className="mt-1 flex items-center justify-center">
                     <div className={`w-6 h-6 rounded-full mr-2 ${bgColor}`}></div>
                     <p className="text-lg text-center">{message}</p>
