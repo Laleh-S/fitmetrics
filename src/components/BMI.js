@@ -25,6 +25,12 @@ function BMI () {
         dispatch(setUnit(event.target.value))
     };
 
+    const handleClearInputs = (event) => {
+        // clears weight and height in redux state
+        dispatch(setWeight(""))
+        dispatch(setHeight("")) 
+    }
+
     // Background color based on the BMI message
     let bgColor = "";
 
@@ -107,10 +113,19 @@ function BMI () {
                 > 
                     Calculate BMI
                 </button>
+                <button
+                    onClick={handleClearInputs}
+                    className="mt-4 w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 transition duration-300"
+                >
+                    Clear Inputs
+                </button>
                 {bmi && (
-                <div className="mt-6 text-center font-semibold ">
-                    <h2 className="text-lg ">Your BMI is: {bmi}</h2>
-                    <p className={`mt-1 text-lg px-2 py-2 rounded ${bgColor}`}>{message}</p>
+                <div className="mt-6 text-center font-semibold">
+                    <h2 className="text-lg">Your BMI is {bmi}</h2>
+                    <div className="mt-1 flex items-center justify-center">
+                    <div className={`w-6 h-6 rounded-full mr-2 ${bgColor}`}></div>
+                    <p className="text-lg text-center">{message}</p>
+                    </div>
                 </div>
                 )}
             </div>
