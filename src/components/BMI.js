@@ -51,14 +51,17 @@ function BMI () {
             <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Body Mass Index (BMI) Calculator</h1>
             <div className="w-full md:w-1/2 p-4  md:pl-16">
                 <p className="text-lg text-justify leading-relaxed mb-4">Body Mass Index (BMI) is a numerical value derived from a person's weight and height, used to assess whether they have a healthy body weight for a given height. 
-                The BMI falls into different categories to help identify potential health risks associated with being underweight, overweight, or obese. </p>
+                The BMI falls into different categories to help identify potential health risks associated with being underweight, overweight, or obese.
+                </p>
+                <p>
+                </p>
                 <ul className="text-lg ml-8 list-disc text-left leading-relaxed">
-                    <li><span className="font-semibold">Below 18.5</span> - you're in the underweight range</li>
-                    <li><span className="font-semibold">18.5 to 24.9</span> - you're in the healthy weight range</li>
-                    <li><span className="font-semibold">25 to 29.9</span> - you're in the overweight range</li>
-                    <li><span className="font-semibold">30 to 34.9</span> - you're in the obese range</li>
-                    <li><span className="font-semibold">35 to 39.9</span> - you're in the severely obese range</li>
-                    <li><span className="font-semibold">40 or above</span> - you're in the very severely obese range</li>
+                    <li><span className="font-semibold">Underweight</span> - BMI below 18.5</li>
+                    <li><span className="font-semibold">Normal weight</span> - BMI between 18.5 to 24.9</li>
+                    <li><span className="font-semibold">Overweight</span> - BMI between 25 to 29.9</li>
+                    <li><span className="font-semibold">Obese</span> - BMI between 30 to 34.9</li>
+                    <li><span className="font-semibold">Severely obese</span> - BMI between 35 to 39.9</li>
+                    <li><span className="font-semibold">Very severely obese</span> - BMI 40 or above</li>
                 </ul>
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
@@ -75,6 +78,7 @@ function BMI () {
                             <option value="metric">Metric (kg, cm)</option>
                             <option value="imperial">Imperial (lbs, inches)</option>
                         </select>
+                        {error?.unit && <div className="text-red-500 text-sm">Please choose unit</div>}
                     </label>
                 </div>
                 <div className="mb-4">

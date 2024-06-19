@@ -54,6 +54,7 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                         <option value="metric">Metric (kg, cm)</option>
                         <option value="imperial">Imperial (lbs, inches)</option>
                     </select>
+                    {error.unit && <div className="text-red-500 text-sm">Please choose unit</div>}
                 </label>
             </div>
             <div className="mb-4">
@@ -70,6 +71,7 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
+                    {error.gender && <div className="text-red-500 text-sm">Please choose gender</div>}
                 </label>
             </div>
             <div className="mb-4">
@@ -127,6 +129,7 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                         <option value="veryActive">Daily or intense exercise 3-4 times/week</option>
                         <option value="extraActive">Intense exercise 6-7 times/week</option>
                     </select>
+                    {error.activityLevel && <div className="text-red-500 text-sm">Please choose activity level</div>}
                 </label>
             </div> 
             )}

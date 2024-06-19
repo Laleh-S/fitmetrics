@@ -21,7 +21,22 @@ function TDEE () {
             <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Total Daily Energy Expenditure (TDEE) Calculator</h1>
             <div className="w-full md:w-1/2 p-4  md:pl-16">
                 <p className="text-lg text-justify leading-relaxed mb-4">
-                    BMR refers to the minimum amount of energy the body needs to maintain basic physiological functions while completely inactive, such as breathing, circulating blood, and regulating body temperature.
+                TDEE measures how many calories the body needs in a day to maintain its current weight, considering its activity level. 
+                A TDEE calculator is a tool that estimates this daily calorie requirement based on factors such as age, sex, weight, 
+                height, and activity level. These calculators are widely used for planning diets and fitness goals, providing individuals 
+                with a personalized estimate of their daily energy expenditure. <br/>  <br/>
+                
+                The components of TDEE:<br/>  <br/>
+                
+                1. <span className="font-bold">Basic Metabolic Rate (BMR): </span>  This is the number of calories the body needs at rest to maintain basic physiological 
+                functions like breathing and circulation.<br/> <br/>
+                
+                2. <span className="font-bold">Activity Level: </span> This factor takes into account the individual's level of activity throughout the day. It typically 
+                categorizes activity levels into sedentary, lightly active, moderately active, very active, or extra active.<br/> <br/>
+
+                
+
+
                 </p>
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">

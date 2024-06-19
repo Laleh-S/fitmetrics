@@ -23,8 +23,12 @@ const initialState = { // This defines the initial state of our BMI slice with d
     height: "",
     bmi: null,
     unit: "",
-    // message: "",
-    error: null,
+    message: "",
+    error: {
+        weight: false, 
+        height: false, 
+        unit: false,
+    }
 };
 
 const bmiSlice = createSlice({
@@ -47,17 +51,21 @@ const bmiSlice = createSlice({
         },
         setUnit(state, action){
             state.unit = action.payload;  // action.payload is the data carried by the action to update the height property of the state.
+            if (action.payload) {  // clears error message after entering input
+                state.error = { ...state.error, unit: false };
+            }
         }, 
         calculateBMI(state){
             const weight = parseFloat(state.weight);
             const height = parseFloat(state.height);
 
             // Ensures the input is not empty, NaN, or non-positive
-            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0 || !state.unit) {
                 state.bmi = null;
                 state.error = {
                     weight: isNaN(weight) || weight <= 0,
-                    height: isNaN(height) || height <= 0
+                    height: isNaN(height) || height <= 0,
+                    unit: !state.unit,
                 };
                 state.message = ""; 
                 return; // "return" stops the function from continuing if certain conditions are met.
@@ -98,7 +106,7 @@ const bmiSlice = createSlice({
             state.height = "";
             state.message = "";
             state.bmi = null;
-            state.error = null;
+            state.error = {};
         },
     },
 });

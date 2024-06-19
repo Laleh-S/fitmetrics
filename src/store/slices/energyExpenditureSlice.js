@@ -7,11 +7,17 @@ const initialState = {
     tdee: null,
     age: "",
     gender: "",
-    dailyCalories: null, // daily calorie needs based on activity level
-    activityLevel: "", // the user's selected activity level, such as "sedentary", "lightlyActive", etc
     unit: "",
+    activityLevel: "", // the user's selected activity level, such as "sedentary", "lightlyActive", etc
     message: "",
-    error: { weight: false, height: false, age: false, activityLevel: false },
+    error: { 
+        weight: false, 
+        height: false, 
+        age: false,
+        unit: false,
+        gender: false,
+        activityLevel: false, 
+    },
 }
 
 const energyExpenditureSlice = createSlice({
@@ -21,34 +27,43 @@ const energyExpenditureSlice = createSlice({
         setWeight(state, action){
             state.weight = action.payload;
             if (action.payload) { 
-                state.error = { ...state.error, weight: false };
+                state.error.weight = false;
             } 
         },
 
-        setHeight(state, action){
-            state.height = action.payload;
-            if (action.payload) {  // clears error message after entering input
+        setHeight(state, action) {
+            state.height = action.payload; 
+            if (action.payload) { 
                 state.error = { ...state.error, height: false };
             }
         },
-
-        setAge(state, action){
+        
+        setAge(state, action) {
             state.age = action.payload;
-            if (action.payload) {  
+            if (action.payload) { 
                 state.error = { ...state.error, age: false };
             }
         },
-
-        setGender(state, action){
+        
+        setGender(state, action) {
             state.gender = action.payload;
+            if (action.payload) { 
+                state.error = { ...state.error, gender: false };
+            }
         },
-
-        setUnit(state, action){
+        
+        setUnit(state, action) {
             state.unit = action.payload;
+            if (action.payload) { 
+                state.error = { ...state.error, unit: false };
+            }
         },
-
-        setActivityLevel(state, action){
+        
+        setActivityLevel(state, action) {
             state.activityLevel = action.payload;
+            if (action.payload) { 
+                state.error = { ...state.error, activityLevel: false };
+            }
         },
         setError (state, action) { 
             state.error = action.payload; 
@@ -59,12 +74,14 @@ const energyExpenditureSlice = createSlice({
             const age = parseFloat(state.age);
 
             // Validates inputs
-            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0 || !state.unit || !state.gender) {
                 state.bmr = null;
                 state.error = {
                     weight: isNaN(weight) || weight <= 0,
                     height: isNaN(height) || height <= 0,
                     age: isNaN(age) || age <= 0,
+                    unit: !state.unit,
+                    gender: !state.gender,
                 };
                 state.message = "Please provide valid inputs for all fields."; 
                 return; // "return" stops the function from continuing if certain conditions are met.
@@ -112,6 +129,8 @@ const energyExpenditureSlice = createSlice({
                 isNaN(height) || 
                 weight <= 0 || 
                 height <= 0 || 
+                !state.unit || // if unit is null
+                !state.gender || // if gender is null
                 !state.activityLevel //  checks if state.activityLevel is null, undefined, false, empty string, etc.
             ) {
                 state.tdee = null;
@@ -120,6 +139,8 @@ const energyExpenditureSlice = createSlice({
                     weight: isNaN(weight) || weight <= 0,
                     height: isNaN(height) || height <= 0,
                     age: isNaN(age) || age <= 0,
+                    unit: !state.unit,
+                    gender: !state.gender,
                     activityLevel: !state.activityLevel,
                 };
                 state.message = "Please provide valid inputs for all fields.";
