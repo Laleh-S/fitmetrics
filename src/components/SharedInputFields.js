@@ -108,7 +108,7 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                         name="age"
                         value={age}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md "
                     />
                     {error.age && <div className="text-red-500 text-sm">Please enter a valid age</div>}
                 </label>
@@ -124,10 +124,10 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                     >
                         <option value="">Choose Activity</option>
                         <option value="sedentary">Sedentary: little or no exercise</option>
-                        <option value="lightlyActive">Exercise 1-3 times/week</option>
-                        <option value="moderatelyActive">Exercise 4-5 times/week</option>
-                        <option value="veryActive">Daily or intense exercise 3-4 times/week</option>
-                        <option value="extraActive">Intense exercise 6-7 times/week</option>
+                        <option value="lightlyActive">Light exercise 1-3 times a week</option>
+                        <option value="moderatelyActive">Moderate exercise 3-5 times a week</option>
+                        <option value="veryActive">Intense exercise 6-7 times a week</option>
+                        <option value="extraActive">Very intense exercise 6-7 times a week & physical job </option>
                     </select>
                     {error.activityLevel && <div className="text-red-500 text-sm">Please choose activity level</div>}
                 </label>

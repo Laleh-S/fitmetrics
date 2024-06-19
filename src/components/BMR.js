@@ -27,14 +27,14 @@ function BMR () {
                     breathing, circulating blood, and regulating body temperature while at rest.
                     
                     <br/> <br/> 
-                    BMR is typically measured under very controlled conditions after a full night's sleep, in a fasted state 
-                    (usually 12 hours without food), and in a thermoneutral environment (a temperature that does not require the
-                    body to generate extra heat or cooling).
+                    BMR is typically measured under very controlled conditions: after a full night's sleep, in a fasted state 
+                    (usually 12 hours without food), and in a thermoneutral environment (a temperature that does not require the body 
+                    to generate extra heat or cooling).
                     <br/><br/>
                     There are several formulas to calculate BMR, but two of the most commonly used are the Harris-Benedict equation 
                     and the Mifflin-St Jeor equation. Both formulas take into account factors such as age, gender, weight, and height.
                     <br/><br/>
-                    Here we are using Mifflin-St Jeor Equation:
+                    This calculator uses the Mifflin-St Jeor Equation below:
                     <br/><br/>
                     <span className="font-bold">For men: </span> BMR = (10 x Weight in kg) + (6.25 x Height in cm) - (5 x Age in years) + 5  
                     <br/>

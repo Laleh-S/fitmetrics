@@ -24,15 +24,26 @@ function TDEE () {
                 TDEE measures how many calories the body needs in a day to maintain its current weight, considering its activity level. 
                 A TDEE calculator is a tool that estimates this daily calorie requirement based on factors such as age, sex, weight, 
                 height, and activity level. These calculators are widely used for planning diets and fitness goals, providing individuals 
-                with a personalized estimate of their daily energy expenditure. <br/>  <br/>
+                with a personalized estimate of their daily energy expenditure. Here is how it works:<br/>  <br/>
                 
-                The components of TDEE:<br/>  <br/>
+                1. <span className="font-bold">Basic Metabolic Rate (BMR): </span>  This is the number of calories the body needs at 
+                rest to maintain basic physiological functions like breathing and circulation. Refer to the BMR page for details on 
+                Basic Metabolic Rate (BMR).<br/> <br/>
                 
-                1. <span className="font-bold">Basic Metabolic Rate (BMR): </span>  This is the number of calories the body needs at rest to maintain basic physiological 
-                functions like breathing and circulation.<br/> <br/>
-                
-                2. <span className="font-bold">Activity Level: </span> This factor takes into account the individual's level of activity throughout the day. It typically 
-                categorizes activity levels into sedentary, lightly active, moderately active, very active, or extra active.<br/> <br/>
+                2. <span className="font-bold">Activity Multiplier: </span> To estimate TDEE, the BMR is multiplied by an activity 
+                factor that represents the overall physical activity level:.<br/> <br/>
+                <ul className="text-lg ml-8 list-disc text-left leading-relaxed">
+                    <li><span className="font-semibold">Sedentary</span> (little or no exercise) - BMR x 1.2</li>
+                    <li><span className="font-semibold">Lightly active</span> (moderate light exercise 1-3 times a week) - BMR x 1.375</li>
+                    <li><span className="font-semibold">Moderately active </span>(exercise 3-5 times a weekt) - BMR x 1.55</li>
+                    <li><span className="font-semibold">Very active</span> (hard exercise/sports 6-7 days a week) - BMR x 1.725</li>
+                    <li><span className="font-semibold">Super active </span> (very hard exercise/sports & physical job or 2x training) - BMR x 1.9</li>
+                </ul>
+                <br/> 
+
+                3. <span className="font-bold">TDEE Calculation: </span>
+                It's calculated by multiplying the BMR by the activity multiplier: <br/>
+                <span className="italic">TDEE = BMR x Activity Level </span>
 
                 
 
