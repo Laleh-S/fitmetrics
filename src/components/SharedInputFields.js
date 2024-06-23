@@ -1,40 +1,57 @@
-// InputFields.js
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    setWeight,
-    setHeight,
-    setAge,
-    setGender,
-    setUnit,
-    setActivityLevel,
-} from "../store/slices/energyExpenditureSlice.js";
+
+import React, { useContext } from "react";
+import { CalculatorsContext } from "../context/CalculatorsContext";
 
 const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop comes from bmr.js
-    const dispatch = useDispatch();
-    const { weight, height, age, gender, unit, activityLevel, error } = useSelector((state) => state.energyExpenditure);
+    const {  
+            weight, setWeight,
+            height, setHeight,
+            age, setAge,
+            gender, setGender,
+            unit, setUnit,
+            activityLevel, setActivityLevel,
+            bmr, setBmr,
+            tdee, setTdee,
+            bmi, setBmi,
+            error, setError,
+        } = useContext(CalculatorsContext)
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         if (name === "weight") {
-            dispatch(setWeight(value));
+            setWeight(value);
+            setError({...error, weight: false }) 
         } else if (name === "height") {
-            dispatch(setHeight(value));
+            setHeight(value);
+            setError({...error, height: false }) 
         } else if (name === "age") {
-            dispatch(setAge(value));
+            setAge(value);
+            setError({...error, age: false }) 
         }
     };
 
     const handleUnitChange = (event) => {
-        dispatch(setUnit(event.target.value));
+        const value = (event.target.value)
+        setUnit(value);
+        if(value){
+            setError({...error, unit: false }) // ...error means all errors stay the same, just clear unit error.
+        }
     };
 
     const handleGenderChange = (event) => {
-        dispatch(setGender(event.target.value));
+        const value = (event.target.value);
+        setGender(value);
+        if(value){
+            setError({...error, gender: false })
+        }
     };
 
     const handleActivityLevelChange = (event) => {
-        dispatch(setActivityLevel(event.target.value));
+        const value = (event.target.value);
+        setActivityLevel(value);
+        if (value){
+            setError({...error, activityLevel: false}) 
+        }
     };
 
     return (

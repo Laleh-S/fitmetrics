@@ -1,21 +1,18 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { calculateBMR, clearInputs } from "../store/slices/energyExpenditureSlice";
+import React, {useContext} from "react";
+import { CalculatorsContext } from "../context/CalculatorsContext";
 import SharedInputFields from "./SharedInputFields";
 
 
-function BMR () {
-    const dispatch = useDispatch();
-    const { bmr, message, } = useSelector((state) => state.energyExpenditure);
+const BMR = () => {
+    const {  bmr, calculateBMR, clearInputs } = useContext(CalculatorsContext);
 
     const handleCalculateBMR = () => {
         console.log("Calculate BMR button clicked");
-        dispatch(calculateBMR());
+        calculateBMR()
     };
 
     const handleClearInputs = () => {
-        // Clear all inputs or any other action 
-        dispatch(clearInputs());
+        clearInputs();
     };
 
     return (

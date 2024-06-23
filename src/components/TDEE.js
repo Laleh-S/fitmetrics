@@ -1,53 +1,49 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { calculateTDEE, clearInputs } from "../store/slices/energyExpenditureSlice";
+import React, {useContext} from "react";
+import { CalculatorsContext } from "../context/CalculatorsContext"; 
 import SharedInputFields from "./SharedInputFields";
 
 function TDEE () {
-    const dispatch = useDispatch();
-    const { tdee, message } = useSelector((state => state.energyExpenditure));
-    console.log("TDEE in component:", tdee);
+    const { tdee, setTdee, calculateTDEE, clearInputs, message } = useContext(CalculatorsContext);
+    // console.log("TDEE in component:", tdee);
 
     const handleCalculateTDEE = () => {
-        dispatch(calculateTDEE());
+        calculateTDEE();
     };
 
     const handleClearInputs = () => {
-        dispatch(clearInputs());
+        clearInputs();
     };
 
     return (
         <div className="flex flex-wrap items-center mt-8 px-4">
             <h1 className="text-center py-4 text-3xl font-bold w-full m-8">Total Daily Energy Expenditure (TDEE) Calculator</h1>
             <div className="w-full md:w-1/2 p-4  md:pl-16">
+            <p className="text-lg text-justify leading-relaxed mb-4">
+                    TDEE measures how many calories the body needs in a day to maintain its current weight, considering its activity level. 
+                    A TDEE calculator is a tool that estimates this daily calorie requirement based on factors such as age, sex, weight, 
+                    height, and activity level. These calculators are widely used for planning diets and fitness goals, providing individuals 
+                    with a personalized estimate of their daily energy expenditure. Here is how it works:
+                </p>
                 <p className="text-lg text-justify leading-relaxed mb-4">
-                TDEE measures how many calories the body needs in a day to maintain its current weight, considering its activity level. 
-                A TDEE calculator is a tool that estimates this daily calorie requirement based on factors such as age, sex, weight, 
-                height, and activity level. These calculators are widely used for planning diets and fitness goals, providing individuals 
-                with a personalized estimate of their daily energy expenditure. Here is how it works:<br/>  <br/>
-                
-                1. <span className="font-bold">Basic Metabolic Rate (BMR): </span>  This is the number of calories the body needs at 
-                rest to maintain basic physiological functions like breathing and circulation. Refer to the BMR page for details on 
-                Basic Metabolic Rate (BMR).<br/> <br/>
-                
-                2. <span className="font-bold">Activity Multiplier: </span> To estimate TDEE, the BMR is multiplied by an activity 
-                factor that represents the overall physical activity level:.<br/> <br/>
+                    1. <span className="font-bold">Basic Metabolic Rate (BMR): </span>  This is the number of calories the body needs at 
+                    rest to maintain basic physiological functions like breathing and circulation. Refer to the BMR page for details on 
+                    Basic Metabolic Rate (BMR).
+                </p>
+                <p className="text-lg text-justify leading-relaxed mb-4">
+                    2. <span className="font-bold">Activity Multiplier: </span> To estimate TDEE, the BMR is multiplied by an activity 
+                    factor that represents the overall physical activity level:
+                </p>
                 <ul className="text-lg ml-8 list-disc text-left leading-relaxed">
                     <li><span className="font-semibold">Sedentary</span> (little or no exercise) - BMR x 1.2</li>
                     <li><span className="font-semibold">Lightly active</span> (moderate light exercise 1-3 times a week) - BMR x 1.375</li>
-                    <li><span className="font-semibold">Moderately active </span>(exercise 3-5 times a weekt) - BMR x 1.55</li>
+                    <li><span className="font-semibold">Moderately active </span>(exercise 3-5 times a week) - BMR x 1.55</li>
                     <li><span className="font-semibold">Very active</span> (hard exercise/sports 6-7 days a week) - BMR x 1.725</li>
-                    <li><span className="font-semibold">Super active </span> (very hard exercise/sports & physical job or 2x training) - BMR x 1.9</li>
+                    <li><span className="font-semibold">Super active </span> (very hard exercise/sports & physical job or 2x training) - BMR x 1.9</li> <br/>
                 </ul>
-                <br/> 
-
-                3. <span className="font-bold">TDEE Calculation: </span>
-                It's calculated by multiplying the BMR by the activity multiplier: <br/>
-                <span className="italic">TDEE = BMR x Activity Level </span>
-
-                
-
-
+                <p className="text-lg text-justify leading-relaxed mb-4">
+                    3. <span className="font-bold">TDEE Calculation: </span>
+                    It's calculated by multiplying the BMR by the activity multiplier: <br/>
+                    <span className="italic">TDEE = BMR x Activity Level </span>
                 </p>
             </div>
             <div className="w-full md:w-1/2 max-w-lg mx-auto mt-8 p-6 border border-gray-200 rounded-lg shadow-md bg-grey">
