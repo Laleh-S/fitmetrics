@@ -34,7 +34,7 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
         const value = (event.target.value)
         setUnit(value);
         if(value){
-            setError({...error, unit: false }) // ...error means all errors stay the same, just clear unit error.
+            setError({ ...error, unit: false }) // ...error means all errors stay the same, just clear unit error.
         }
     };
 
@@ -60,7 +60,6 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                     Unit
                     <select
-                        type="number"
                         name="unit"
                         value={unit || ""}
                         onChange={handleUnitChange}
@@ -78,7 +77,6 @@ const SharedInputFields = ({ showActivityLevel }) => { // showActivityLevel prop
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                     Gender
                     <select
-                        type="number"
                         name="gender"
                         value={gender || ""}
                         onChange={handleGenderChange}

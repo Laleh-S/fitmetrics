@@ -1,32 +1,45 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setWeight, setHeight, calculateBMI, setUnit, clearBMI } from "../store/slices/bmiSlice";
+import React, { useContext } from "react";
+import { CalculatorsContext } from "../context/CalculatorsContext";
 
 
 function BMI () {
-    const dispatch = useDispatch();
-    const { weight, height, bmi, message, error, unit } = useSelector((state) => state.bmi);
+    const { 
+        weight, setWeight,
+        height, setHeight,
+        unit, setUnit,
+        bmi, setBmi,
+        error, setError,
+        message, setMessage,
+        calculateBMI,
+        clearInputs,
+    } = useContext(CalculatorsContext);
 
     // Event handler for weight and height input
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         if (name === "weight") {
-            dispatch(setWeight(value));
+            setWeight(value);
+            setError({ ...error, weight: false })
         } else if (name === "height") {
-            dispatch(setHeight(value));
+            setHeight(value);
+            setError({ ...error, height: false })
         }
     };
 
     const handleCalculateBMI = () => {
-        dispatch(calculateBMI());
+        calculateBMI();
     };
 
     const handleUnitChange = (event) => {
-        dispatch(setUnit(event.target.value))
+        const value = (event.target.value)
+        setUnit(value);
+        if(value){
+            setError({ ...error, unit: false })
+        }
     };
 
     const handleClearInputs = () => {
-        dispatch(clearBMI())
+        clearInputs();
     }
 
     // Background color based on the BMI message
@@ -125,8 +138,8 @@ function BMI () {
                 <div className="mt-6 text-center font-semibold">
                     <h2 className="text-lg">BMI = {bmi}</h2>
                     <div className="mt-1 flex items-center justify-center">
-                    <div className={`w-6 h-6 rounded-full mr-2 ${bgColor}`}></div>
-                    <p className="text-lg text-center">{message}</p>
+                        <div className={`w-6 h-6 rounded-full mr-2 ${bgColor}`}></div>
+                        <p className="text-lg text-center">{message}</p>
                     </div>
                 </div>
                 )}

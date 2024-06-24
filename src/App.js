@@ -15,24 +15,24 @@ import CalculatorsContextProvider from "./context/CalculatorsContext";
 
 function App() {
     return (
-            <CalculatorsContextProvider>
-                <Router>
-                    <div className="flex flex-col h-screen"> {/* "h-scree" makes the main container take up the full height of the viewport */}
-                        <Navbar />
-                        <div className="flex flex-1"> 
-                            <Sidebar />
-                            <div className="flex-1 p-4"> 
-                                <Routes>
-                                    <Route path="/" element={<Home />} />
-                                    <Route path="/bmi" element={<BMI />} />
-                                    <Route path="/bmr" element={<BMR />} />
-                                    <Route path="/tdee" element={<TDEE />} />
-                                </Routes>
-                            </div>
+        <CalculatorsContextProvider>
+            <Router>
+                <div className="flex flex-col h-screen"> {/* "h-scree" makes the main container take up the full height of the viewport */}
+                    <Navbar />
+                    <div className="flex flex-1"> 
+                        <Sidebar />
+                        <div className="flex-1 p-4"> 
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/bmi" element={<BMI />} />
+                                <Route path="/bmr" element={<BMR />} />
+                                <Route path="/tdee" element={<TDEE />} />
+                            </Routes>
                         </div>
                     </div>
-                </Router>
-            </CalculatorsContextProvider>
+                </div>
+            </Router>
+        </CalculatorsContextProvider>
     );
 }
 

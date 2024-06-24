@@ -32,12 +32,14 @@ export const CalculatorsContextProvider = ({ children }) => {
         activityLevel: false,
     });
 
+    // ❈❈❈❈❈❈❈❈❈❈ BMR CALCULATOR FUNCTION ❈❈❈❈❈❈❈❈❈❈ //
+    // ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈ //
     const calculateBMR = () => {
-        if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0 || !unit || !gender){
+        if (weight <= 0 || height <= 0 || age <= 0 || !unit || !gender ){
             setError({
-                weight: isNaN(weight) || weight <= 0,
-                height: isNaN(height) || height <= 0,
-                age: isNaN(age) || age <= 0,
+                weight: weight <= 0,
+                height: height <= 0 ,
+                age: age <= 0,
                 unit: !unit,
                 gender: !gender,
             });
@@ -45,10 +47,10 @@ export const CalculatorsContextProvider = ({ children }) => {
         };
 
         let bmrValue = null;
+        const weightInKg = weight / 2.20462; // convert weight from lbs to kg
+        const heightInCm = height * 2.54; // converts height from inches to cm
+        
         if (unit === "imperial"){
-            // Convert weight from lbs to kg and height from inches to cm
-            const weightInKg = weight / 2.20462;
-            const heightInCm = height * 2.54;
             if (gender === "male"){
                 bmrValue = (10 * weightInKg) + (6.25 * heightInCm) - (5 * age) + 5;
             } else {
@@ -62,8 +64,11 @@ export const CalculatorsContextProvider = ({ children }) => {
             }
         }
         setBmr(bmrValue !== null? bmrValue.toFixed(2) : null);
+        return bmrValue;
     };
 
+    // ❈❈❈❈❈❈❈❈❈❈ TDEE CALCULATOR FUNCTION ❈❈❈❈❈❈❈❈❈❈❈ 
+    // ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈ 
     const calculateTDEE = () => {
         const activityMultipliers = {
             sedentary: 1.2,
@@ -73,11 +78,11 @@ export const CalculatorsContextProvider = ({ children }) => {
             extraActive: 1.9,
         };
 
-        if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0 || !unit || !gender || !activityLevel){
+        if (weight <= 0 || height <= 0 || age <= 0 || !unit || !gender || !activityLevel){
             setError({
-                weight: isNaN(weight) || weight <= 0,
-                height: isNaN(height) || height <= 0,
-                age: isNaN(age) || age <= 0,
+                weight: weight <= 0,
+                height: height <= 0 ,
+                age: age <= 0,
                 unit: !unit,
                 gender: !gender,
                 activityLevel: !activityLevel,
@@ -85,34 +90,63 @@ export const CalculatorsContextProvider = ({ children }) => {
             return;
         };
 
-        let bmrValue = null;
-        if (unit === "imperial"){
-            // Convert weight from lbs to kg and height from inches to cm
-            const weightInKg = weight / 2.20462;
-            const heightInCm = height * 2.54;
-            if (gender === "male"){
-                bmrValue = (10 * weightInKg) + (6.25 * heightInCm) - (5 * age) + 5;
-            } else {
-                bmrValue = (10 * weightInKg) + (6.25 * heightInCm) - (5 * age) - 161;
-            }
-        } else if (unit === "metric"){
-            if (gender === "male"){
-                bmrValue = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-            } else {
-                bmrValue = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-            }
-        }
-        if (bmrValue !== null){
+        const bmrValue = calculateBMR();
+        if (bmrValue !== null) {
             const tdeeValue = bmrValue * activityMultipliers[activityLevel];
-            setTdee(tdeeValue.toFixed(2))
-        }else {
+            setTdee(tdeeValue.toFixed(2));
+        } else {
             setTdee(null);
         }
-
-
-
     };
 
+    // ❈❈❈❈❈❈❈❈❈❈ BMI CALCULATOR ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈ 
+    // ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
+    const calculateBMI = () => {
+        if (weight <= 0 || height <= 0 || !unit){
+            setError({
+                weight: weight <= 0,
+                height: height <= 0,
+                unit: !unit,
+            });
+            setMessage("");
+            setBmi(null);
+            return;
+        };
+    
+        let bmiValue;
+        if (unit === "imperial") {
+            bmiValue = (weight / (height * height)) * 703;
+        } else {
+            const heightToMeter = height / 100;
+            bmiValue = weight / (heightToMeter * heightToMeter);
+        }
+
+        // Determines the BMI range
+        let bmiMessage = "";
+
+        if (bmiValue < 18.5) {
+            bmiMessage = "Underweight";
+        } else if (bmiValue >= 18.5 && bmiValue < 25) {
+            bmiMessage = "Normal weight";
+        } else if (bmiValue >= 25 && bmiValue < 30) {
+            bmiMessage = "Overweight";
+        } else if (bmiValue >= 30 && bmiValue < 35) {
+            bmiMessage = "Obese";
+        } else if (bmiValue >= 35 && bmiValue < 40) {
+            bmiMessage = "Severely Obese";
+        } else if (bmiValue > 40){
+            bmiMessage = "Very Severely Obese";
+        }
+        
+        setBmi(bmiValue.toFixed(2));
+        setMessage(bmiMessage);
+    };
+
+    
+    
+
+    // ❈❈❈❈❈❈❈❈❈❈ FUNCTION TO CLEAR INPUTS ❈❈❈❈❈❈❈❈❈❈ 
+    // ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
     const clearInputs = () =>{
             // Clears all input fields
             setWeight("");
@@ -124,11 +158,13 @@ export const CalculatorsContextProvider = ({ children }) => {
             //Clears results
             setBmr(null);
             setTdee(null);
+            setBmi(null);
             setMessage("");
             setError({});
     };
 
-    // CalulatorsContext value object
+    // ❈❈❈❈❈❈❈❈❈❈ CONTEXT VALUE OBJECT ❈❈❈❈❈❈❈❈❈❈❈❈❈❈ 
+    // ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
     const contextValue = {
         weight, setWeight,
         height, setHeight,
@@ -144,6 +180,7 @@ export const CalculatorsContextProvider = ({ children }) => {
         clearInputs,
         calculateBMR,
         calculateTDEE,
+        calculateBMI,
     };
 
     return (
