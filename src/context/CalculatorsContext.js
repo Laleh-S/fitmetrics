@@ -12,7 +12,7 @@ import React, { createContext, useState } from "react";
 
 export const CalculatorsContext = createContext(); 
 
-export const CalculatorsContextProvider = ({ children }) => {
+const CalculatorsContextProvider = ({ children }) => {
     const [weight, setWeight] = useState("");
     const [height, setHeight] = useState("");
     const [age, setAge] = useState("");
@@ -141,9 +141,6 @@ export const CalculatorsContextProvider = ({ children }) => {
         setBmi(bmiValue.toFixed(2));
         setMessage(bmiMessage);
     };
-
-    
-    
 
     // ❈❈❈❈❈❈❈❈❈❈ FUNCTION TO CLEAR INPUTS ❈❈❈❈❈❈❈❈❈❈ 
     // ❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈❈
