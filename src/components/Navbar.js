@@ -10,9 +10,12 @@ function Navbar () {
     return (
         <nav className="bg-yellow  h-24 ">
             <div className="max-w-7xl mx-auto flex items-center h-full"> 
-            <Link to="/" className=" text-yellow text-xl font-bold">
-                <img src={logoBlue} alt="Logo" className="w-40 "/>
-            </Link> 
+                <Link to="/" className=" text-yellow text-xl font-bold">
+                    <img src={logoBlue} alt="Logo" className="w-40 "/>
+                </Link> 
+                <ul>
+                    <li className=""><Link to="/register" className="text-black">Register</Link></li>
+                </ul>
             </div>
         </nav>
     );

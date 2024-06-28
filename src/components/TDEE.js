@@ -3,7 +3,7 @@ import { CalculatorsContext } from "../context/CalculatorsContext";
 import SharedInputFields from "./SharedInputFields";
 
 function TDEE () {
-    const { tdee, setTdee, calculateTDEE, clearInputs, message } = useContext(CalculatorsContext);
+    const { tdee, setTdee, calculateTDEE, clearInputs } = useContext(CalculatorsContext);
     // console.log("TDEE in component:", tdee);
 
     const handleCalculateTDEE = () => {
@@ -64,7 +64,6 @@ function TDEE () {
                 {tdee && (
                     <div className="mt-4 text-center font-semibold">
                         <h2 className="text-lg font-semibold">TDEE = <span className="text-green-600">{tdee}</span> calories a day</h2>
-                        <p>{message}</p>
                     </div>
                 )}
             </div>

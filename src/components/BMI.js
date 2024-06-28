@@ -134,7 +134,7 @@ function BMI () {
                 >
                     Clear 
                 </button>
-                {bmi && (
+                {bmi && ( // if bmi is truthy display the result and message otherwise donn't show the div.
                 <div className="mt-6 text-center font-semibold">
                     <h2 className="text-lg">BMI = {bmi}</h2>
                     <div className="mt-1 flex items-center justify-center">

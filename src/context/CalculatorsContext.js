@@ -19,6 +19,7 @@ const CalculatorsContextProvider = ({ children }) => {
     const [gender, setGender] = useState("");
     const [unit, setUnit] = useState("");
     const [activityLevel, setActivityLevel] = useState("");
+    // initializing bmi, bmr, and tdee with null to maintains type consistency and avoids unnecessary type conversions.
     const [bmr, setBmr] = useState(null);
     const [tdee, setTdee] = useState(null);
     const [bmi, setBmi] = useState(null);

@@ -5,14 +5,19 @@
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import BMI from "./components/BMI";
 import BMR from "./components/BMR";
 import TDEE from "./components/TDEE";
+import Register from "./components/Register";
+import { app, analytics } from './services/firebase';
+
 import CalculatorsContextProvider from "./context/CalculatorsContext";
-import AuthContextProvider from "./context/AuthContext"
+import AuthContextProvider from "./context/AuthContext";
+
 
 function App() {
     return (
@@ -29,6 +34,7 @@ function App() {
                                     <Route path="/bmi" element={<BMI />} />
                                     <Route path="/bmr" element={<BMR />} />
                                     <Route path="/tdee" element={<TDEE />} />
+                                    <Route path="/register" element={<Register />} /> 
                                 </Routes>
                             </div>
                         </div>

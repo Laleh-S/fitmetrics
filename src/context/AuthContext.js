@@ -6,10 +6,13 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 export const AuthContextProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
+    // ensures the authenticated user's details are stored and accessible throughout the application.
+    // initially to null as no loser has logedin, if not null, displays user's name and welcome message.
+    const [currentUser, setCurrentUser] = useState(null); 
 
-    // "true" indicates that the app is in the proccess of checking user authentication.
+    // The loading state is initially true, meaning the app is still checking if the user is logged in or not.
     const [loading, setLoading] = useState(true);
+    
 
     
     useEffect(() => {
@@ -18,8 +21,10 @@ export const AuthContextProvider = ({ children }) => {
             setLoading(false);
         });
 
-        return unsubscribe;
-    }, []);
+        return () => unsubscribe();
+    }, []); // [] means this effect only runs once, when the component first renders on the page, and cleans up 
+    // when the component is removed from the page.
+    
     
     // ❈❈❈❈❈❈❈❈❈ REGISTER FUNCTION ❈❈❈❈❈❈❈❈❈❈ 
     const register = (email, password) => {
@@ -45,11 +50,12 @@ export const AuthContextProvider = ({ children }) => {
         loading
     };
 
-    // The AuthProvider component shows its children only when the loading is done. This prevents displaying content 
-    // that depends on authentication before it's ready.
+
+    // the !loading && children indicates "render the children only when loading is false."
+    // so the app's content is only displayed after the authentication check is complete.
     return (
         <AuthContext.Provider value={contextValue}>
-            {loading && children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 };
