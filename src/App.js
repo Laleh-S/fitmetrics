@@ -13,6 +13,7 @@ import BMI from "./components/BMI";
 import BMR from "./components/BMR";
 import TDEE from "./components/TDEE";
 import Register from "./components/Register";
+import Login from "./components/Login";
 import { app, analytics } from './services/firebase';
 
 import CalculatorsContextProvider from "./context/CalculatorsContext";
@@ -35,6 +36,7 @@ function App() {
                                     <Route path="/bmr" element={<BMR />} />
                                     <Route path="/tdee" element={<TDEE />} />
                                     <Route path="/register" element={<Register />} /> 
+                                    <Route path="/Login" element={<Login />} /> 
                                 </Routes>
                             </div>
                         </div>

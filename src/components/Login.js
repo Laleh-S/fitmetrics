@@ -1,19 +1,18 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../context/AuthContext";
 
-
-const Register = () => {
+const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState(""); 
-    
-    const { register } = useContext(AuthContext);
+
+    const { Login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate("/Login")
+        navigate("/profile")
     };
 
     const handdleEmailChange = (event) => {
@@ -23,11 +22,11 @@ const Register = () => {
     const handdlePasswordChange = (event) => {
         setPassword(event.target.value)
     };
-
+    
     return (
         <div className="">
             <form className="" onSubmit={handleSubmit}>
-                <h2>Registe for an account</h2>
+                <h2>Login</h2>
                 <label className="">
                     Email
                     <input
@@ -50,10 +49,10 @@ const Register = () => {
                         required
                     />
                 </label>
-                <button type="submit" className="">Register</button>
+                <button type="submit" className="">Login</button>
             </form>
         </div>
-    )
+    );
 };
 
-export default Register;
+export default Login;

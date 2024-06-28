@@ -15,6 +15,7 @@ function Navbar () {
                 </Link> 
                 <ul>
                     <li className=""><Link to="/register" className="text-black">Register</Link></li>
+                    <li className=""><Link to="/Login" className="text-black">Login</Link></li>
                 </ul>
             </div>
         </nav>
