@@ -5,28 +5,39 @@ import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState(""); 
-
-    const { Login } = useContext(AuthContext);
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        navigate("/profile")
+        try {
+            await login(email, password);
+            setLoginSuccess(true);
+            navigate("/profile");
+        } catch (error) {
+            setError(error.message);
+        }
+        console.log("Email submitted:", email);
     };
 
     const handdleEmailChange = (event) => {
-        setEmail(event.target.value)
+        setEmail(event.target.value);
     };
 
     const handdlePasswordChange = (event) => {
-        setPassword(event.target.value)
+        setPassword(event.target.value);
     };
     
     return (
         <div className="">
             <form className="" onSubmit={handleSubmit}>
                 <h2>Login</h2>
+                {loginSuccess && <p style={{ color: 'green' }}>Login successful!</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <label className="">
                     Email
                     <input

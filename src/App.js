@@ -14,6 +14,7 @@ import BMR from "./components/BMR";
 import TDEE from "./components/TDEE";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Profile from "./components/Profile";
 import { app, analytics } from './services/firebase';
 
 import CalculatorsContextProvider from "./context/CalculatorsContext";
@@ -37,6 +38,7 @@ function App() {
                                     <Route path="/tdee" element={<TDEE />} />
                                     <Route path="/register" element={<Register />} /> 
                                     <Route path="/Login" element={<Login />} /> 
+                                    <Route path="/Profile" element={<Profile />} /> 
                                 </Routes>
                             </div>
                         </div>

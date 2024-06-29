@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
-import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
+import { 
+    onAuthStateChanged, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    signOut, getAuth, 
+    updateProfile } from "firebase/auth";
 import { app } from "../services/firebase";
 
 export const AuthContext = createContext();
@@ -12,11 +17,11 @@ export const AuthContextProvider = ({ children }) => {
 
     // The loading state is initially true, meaning the app is still checking if the user is logged in or not.
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); 
     
-
     
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async(user) => {
             setCurrentUser(user);
             setLoading(false);
         });
@@ -25,15 +30,25 @@ export const AuthContextProvider = ({ children }) => {
     }, []); // [] means this effect only runs once, when the component first renders on the page, and cleans up 
     // when the component is removed from the page.
     
-    
+
     // ❈❈❈❈❈❈❈❈❈ REGISTER FUNCTION ❈❈❈❈❈❈❈❈❈❈ 
-    const register = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password);
-    }
+    const register = async (name, email, password) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            return userCredential.user; // Update user state upon successful registration
+        } catch (error) {
+            setError(error.message); // Handle registration errors
+        }
+    };
 
     // ❈❈❈❈❈❈❈❈❈ LOGIN FUNCTION ❈❈❈❈❈❈❈❈❈❈  
-    const login = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password)
+    const login = async (email, password) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            setCurrentUser(userCredential.user);
+        } catch (error) {
+            throw error
+        }
     }
 
     // ❈❈❈❈❈❈❈❈❈ LOG OUT FUNCTION ❈❈❈❈❈❈❈❈❈❈ 
