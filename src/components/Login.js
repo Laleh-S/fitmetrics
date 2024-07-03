@@ -6,10 +6,9 @@ import { AuthContext } from "../context/AuthContext";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
     const [loginSuccess, setLoginSuccess] = useState(false);
     
-    const { login } = useContext(AuthContext);
+    const { login, error, setError } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {

@@ -1,15 +1,31 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { app } from "../services/firebase";
-
-const db = getFirestore(app);
 
 const Profile = () => {
-    const { logout, currentUser } = useContext(AuthContext);
-    const [userName, setUserName] = useState(""); // State to store user's name
+    const { logout, currentUser, setCurrentUser } = useContext(AuthContext);
+    const [goodbyeMessage, setGoodbyeMessage] = useState(false);
+    const [userName, setUserName] = useState('');
 
+    const handleLogout = async () => {
+        try {
+            setUserName(currentUser.displayName); // Store the user's name
+            await logout();
+            setGoodbyeMessage(true);
+            setCurrentUser(null);
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
+    useEffect(() => {
+        if (currentUser) {
+            setGoodbyeMessage(false);
+        }
+    }, [currentUser]);
+
+    if (goodbyeMessage) {
+        return <div>Goodbye {userName}</div>;
+    }
 
     if (!currentUser) {
         return <div>Loading...</div>;
@@ -18,9 +34,10 @@ const Profile = () => {
     return (
         <div>
             <h2>Profile Page</h2>
-            <p>Welcome, {currentUser.email}</p>
+            <p>Welcome, {currentUser.displayName}</p>
+            <p>Email: {currentUser.email}</p>
             <p>User ID: {currentUser.uid}</p>
-            <button onClick={logout}>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
         </div>
     );
 };

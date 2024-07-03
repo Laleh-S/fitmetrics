@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"; //! added
 import { 
     onAuthStateChanged, 
     signInWithEmailAndPassword, 
@@ -9,10 +10,11 @@ import { app } from "../services/firebase";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
+const db = getFirestore(app) //! added
 
 export const AuthContextProvider = ({ children }) => {
     // ensures the authenticated user's details are stored and accessible throughout the application.
-    // initially to null as no loser has logedin, if not null, displays user's name and welcome message.
+    // initially to null as no user has logedin, if not null, displays user's name and welcome message.
     const [currentUser, setCurrentUser] = useState(null); 
 
     // The loading state is initially true, meaning the app is still checking if the user is logged in or not.
@@ -32,12 +34,24 @@ export const AuthContextProvider = ({ children }) => {
     
 
     // ❈❈❈❈❈❈❈❈❈ REGISTER FUNCTION ❈❈❈❈❈❈❈❈❈❈ 
-    const register = async (name, email, password) => {
+    const register = async (username, email, password) => {
         try {
+            // creates a new user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            return userCredential.user; // Update user state upon successful registration
+            
+            // holds the credentials for autenticated user
+            const user = userCredential.user;
+
+            // Updates the user's profile with the username
+            await updateProfile(user, {displayName: username});
+
+            // Updates the currentUser state with the username. 
+            // ...user means keep all existing user information, only add or update the displayName property."
+            setCurrentUser({...user, displayName: username});
+            
+            return user;
         } catch (error) {
-            setError(error.message); // Handle registration errors
+            setError(error.message);
         }
     };
 
@@ -52,17 +66,25 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     // ❈❈❈❈❈❈❈❈❈ LOG OUT FUNCTION ❈❈❈❈❈❈❈❈❈❈ 
-    const logout = () => {
-        return signOut(auth)
-    }
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            setCurrentUser(null);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
     
     // Context's value object.
     const contextValue = {
         currentUser, 
+        setCurrentUser,
         register, 
         login, 
         logout,
-        loading
+        loading,
+        error,
+        setError,
     };
 
 
@@ -75,3 +97,6 @@ export const AuthContextProvider = ({ children }) => {
     );
 };
 export default AuthContextProvider;
+
+
+    
