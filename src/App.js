@@ -15,7 +15,7 @@ import TDEE from "./components/TDEE";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import { app, analytics } from './services/firebase';
+import { app, analytics } from './config/firebase';
 
 import CalculatorsContextProvider from "./context/CalculatorsContext";
 import AuthContextProvider from "./context/AuthContext";

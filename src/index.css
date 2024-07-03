@@ -24,6 +24,10 @@
     background-color: var(--grey-color);
 }
 
+.bg-orange {
+    background-color: var(--orange-color);
+}
+
 .text-primary {
     color: var(--primary-color);
 }

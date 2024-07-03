@@ -1,16 +1,14 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"; //! added
 import { 
     onAuthStateChanged, 
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
     signOut, getAuth, 
     updateProfile } from "firebase/auth";
-import { app } from "../services/firebase";
+import { app, auth } from "../config/firebase";
 
 export const AuthContext = createContext();
-const auth = getAuth(app);
-const db = getFirestore(app) //! added
+// const auth = getAuth(app);
 
 export const AuthContextProvider = ({ children }) => {
     // ensures the authenticated user's details are stored and accessible throughout the application.
