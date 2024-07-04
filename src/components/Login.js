@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -60,6 +61,10 @@ const Login = () => {
                     />
                 </label>
                 <button type="submit" className="">Login</button>
+                <div>
+                    Don't have an account? 
+                    <Link to="/register" className="text-blue-500 font-bold"> Register now</Link>
+                </div>
             </form>
         </div>
     );

@@ -17,19 +17,10 @@ const Profile = () => {
         }
     };
 
-    useEffect(() => {
-        if (currentUser) {
-            setGoodbyeMessage(false);
-        }
-    }, [currentUser]);
-
     if (goodbyeMessage) {
         return <div>Goodbye {userName}</div>;
     }
 
-    if (!currentUser) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <div>

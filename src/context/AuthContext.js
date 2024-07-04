@@ -34,16 +34,12 @@ export const AuthContextProvider = ({ children }) => {
     // ❈❈❈❈❈❈❈❈❈ REGISTER FUNCTION ❈❈❈❈❈❈❈❈❈❈ 
     const register = async (username, email, password) => {
         try {
-            // creates a new user with email and password
+            // creates a new user with email and password using firebase authentication function.
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            
-            // holds the credentials for autenticated user
-            const user = userCredential.user;
+            const user = userCredential.user; // holds the credentials for autenticated user
+            await updateProfile(user, {displayName: username}); // updates the user's profile with the username
 
-            // Updates the user's profile with the username
-            await updateProfile(user, {displayName: username});
-
-            // Updates the currentUser state with the username. 
+            // updates the currentUser state with the username. 
             // ...user means keep all existing user information, only add or update the displayName property."
             setCurrentUser({...user, displayName: username});
             
@@ -56,8 +52,9 @@ export const AuthContextProvider = ({ children }) => {
     // ❈❈❈❈❈❈❈❈❈ LOGIN FUNCTION ❈❈❈❈❈❈❈❈❈❈  
     const login = async (email, password) => {
         try {
+            // sigining in a user with email and password using firebase authentication function.
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            setCurrentUser(userCredential.user);
+            setCurrentUser(userCredential.user); // updates currentUser state
         } catch (error) {
             throw error
         }
@@ -97,4 +94,3 @@ export const AuthContextProvider = ({ children }) => {
 export default AuthContextProvider;
 
 
-    

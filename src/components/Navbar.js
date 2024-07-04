@@ -18,7 +18,7 @@ function Navbar () {
                     <img src={logoBlue} alt="Logo" className="w-40 "/>
                 </Link> 
                 <ul className="flex space-x-4 ml-auto bg-">
-                    <li className=""><Link to="/register" className="text-black">Register</Link></li>
+                    {/* <li className=""><Link to="/register" className="text-black">Register</Link></li> */}
                     {currentUser ? (
                     <li className=""><Link to="/profile" className="text-black">Profile</Link></li>
                     ) : (
