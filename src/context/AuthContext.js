@@ -3,9 +3,10 @@ import {
     onAuthStateChanged, 
     signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
-    signOut, getAuth, 
-    updateProfile } from "firebase/auth";
-import { app, auth } from "../config/firebase";
+    signOut, 
+    updateProfile
+    } from "firebase/auth";
+import { auth, db } from "../config/firebase";
 
 export const AuthContext = createContext();
 // const auth = getAuth(app);
